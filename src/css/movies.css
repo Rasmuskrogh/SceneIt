@@ -1,0 +1,23 @@
+.movies-button-nav {
+  display: flex;
+  padding: 2rem 8rem;
+  justify-content: space-between;
+}
+
+.movies-buttons {
+  border: none;
+  border-radius: 15px;
+  padding: 0.5rem 0;
+  width: 10rem;
+  background-color: white;
+  color: #1e1e1e;
+}
+
+.active {
+  background-color: #1e1e1e;
+  color: white;
+}
+
+.movies-list-item {
+  color: white;
+}

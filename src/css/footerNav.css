@@ -1,0 +1,30 @@
+footer {
+  height: 6rem;
+  background-color: white;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  margin-top: auto;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.footer-film,
+.footer-heart,
+.footer-account {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-film {
+  border-right: black 1px solid;
+}
+.footer-account {
+  border-left: black 1px solid;
+}
+.footer-heart {
+  border-left: black 1px solid;
+  border-right: black 1px solid;
+}
