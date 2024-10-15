@@ -34,21 +34,30 @@ function Movies() {
   };
 
   useEffect(() => {
+    const updateMovieLists = () => {
+      setLikedMovieList();
+      setDislikedMovieList();
+      setSeenMovieList();
+    };
+
+    if (movies.length > 0) {
+      updateMovieLists();
+    }
+  }, [movies, likedMovies, dislikedMovies, seenMovies]);
+
+  useEffect(() => {
     const makeCorrectListActive = () => {
       if (activeButton === 0) {
         setActiveList([...liked]);
-        console.log(setLikedMovieList());
       } else if (activeButton === 1) {
         setActiveList([...disliked]);
-        console.log(setDislikedMovieList());
       } else {
         setActiveList([...seen]);
-        console.log(setSeenMovieList());
       }
     };
     makeCorrectListActive();
     console.log("activeList", activeList);
-  }, [activeButton]);
+  }, [activeButton, disliked, liked, seen]);
 
   const handleActiveButtonClicked = (i: number) => {
     setActiveButton(i);

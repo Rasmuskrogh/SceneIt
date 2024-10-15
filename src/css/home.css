@@ -83,3 +83,10 @@
     margin-top: 2px;
   }
 }
+
+.home-fallback-text {
+  width: 100%;
+  text-align: center;
+  color: white;
+  padding-top: 3rem;
+}

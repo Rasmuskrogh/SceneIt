@@ -24,7 +24,7 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
           postDislikedMovies(movieId),
           getDislikedMovies(),
         ]);
-        console.log("what is value[1]?", values[1].data);
+        console.log(values[1].data);
         setDislikedMovies(await values[1].data);
       } catch (error) {
         console.log(error);
