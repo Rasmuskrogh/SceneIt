@@ -33,4 +33,5 @@ export interface IForm {
   fields: IFromFields[];
   onSubmit: () => void;
   type: String;
+  buttonValue: string;
 }

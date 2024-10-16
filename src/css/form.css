@@ -1,0 +1,75 @@
+.form-form {
+  background-color: #1e1e1e;
+  display: flex;
+  flex-direction: column;
+  width: 28rem;
+  color: white;
+  padding: 2rem;
+  border-radius: 15px;
+}
+
+.form-title {
+  text-align: center;
+  font-size: 2.5rem;
+}
+
+.form-title-account {
+  justify-content: center;
+  display: flex;
+  padding-bottom: 2rem;
+  font-size: 1.7rem;
+  gap: 1rem;
+  img {
+    margin-top: 2px;
+  }
+}
+
+.form-edit-button {
+  background-color: #1e1e1e;
+  border: none;
+}
+
+.form-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.3rem;
+}
+
+.form-label {
+  font-size: 1.5rem;
+  padding-bottom: 0.2rem;
+}
+
+.form-input {
+  height: 1.8rem;
+  border-radius: 5px;
+  border: none;
+  background-color: #d9d9d9;
+}
+
+.form-button-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.form-submit {
+  margin-top: 2rem;
+  padding: 0.4rem 2rem 0.6rem 2rem;
+  border-radius: 15px;
+  font-family: "Itim", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1.5rem;
+  background-color: #d9d9d9;
+}
+
+.form-link-texts {
+  color: white;
+  text-decoration: none;
+  padding-top: 1.5rem;
+  text-align: right;
+  font-family: "Itim", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1.2rem;
+}

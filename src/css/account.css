@@ -1,0 +1,6 @@
+.account-information-section {
+  padding-left: 4rem;
+  display: flex;
+  height: calc(100vh - 11rem);
+  align-items: center;
+}
