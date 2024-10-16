@@ -85,9 +85,9 @@ export const getSeenMovies = async () => {
     console.log(error);
   }
 };
-// export const getMovies = async () => {
+/* export const postUser = async () => {
 
-// }
+} */
 // export const getMovies = async () => {
 
 // }

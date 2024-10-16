@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface IMovies {
   Title: string;
   Summary: string;
@@ -28,10 +30,36 @@ export interface IFromFields {
   required: boolean;
 }
 
-export interface IForm {
+export interface IForm<T> {
   title: String;
   fields: IFromFields[];
-  onSubmit: () => void;
+  onSubmit: (values: T) => void;
   type: String;
   buttonValue: string;
+}
+
+export interface UserData {
+  id: number;
+  username: string;
+  email: string;
+  firstName?: string;
+  lastName?: string;
+  password: string;
+}
+
+export interface AuthContextType {
+  user: UserData | null;
+  isLoading: boolean;
+  setUser: (user: UserData | null) => void;
+}
+
+export interface AuthProviderProps {
+  children: ReactNode;
+}
+
+export interface RegisterFormData {
+  username: string;
+  email: string;
+  password: string;
+  repeat: string;
 }

@@ -3,7 +3,7 @@ import { IMovies } from "../interfaces";
 import Heart from "../assets/heart-home.svg";
 import X from "../assets/x.svg";
 import Button from "../components/Button";
-import { NewMoviesContext } from "../hooks/useContent/NewMoviesContext";
+import { NewMoviesContext } from "../hooks/useContext/NewMoviesContext";
 
 import "../css/home.css";
 

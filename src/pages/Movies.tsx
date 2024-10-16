@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { NewMoviesContext } from "../hooks/useContent/NewMoviesContext";
+import { NewMoviesContext } from "../hooks/useContext/NewMoviesContext";
 import { IMovies } from "../interfaces";
 
 import "../css/movies.css";

@@ -1,4 +1,4 @@
-import Form from "../components/form";
+import Form from "../components/Form";
 
 import "../css/login.css";
 
@@ -11,7 +11,13 @@ function Login() {
   ];
   return (
     <section className="login-section">
-      <Form title="Login" fields={fields} onSubmit={dummyclick} type="login" buttonValue="Login" />
+      <Form
+        title="Login"
+        fields={fields}
+        onSubmit={dummyclick}
+        type="login"
+        buttonValue="Login"
+      />
     </section>
   );
 }
