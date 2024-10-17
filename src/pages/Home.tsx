@@ -59,19 +59,19 @@ function Home() {
 
   const handleXButtonOnClick = async () => {
     if (movie && !dislikedMovies.some((m) => m.IMDBId === movie.IMDBId)) {
-      await addMovieToDislikedMovies(movie?.IMDBId);
+      await addMovieToDislikedMovies(movie.IMDBId);
     }
     setNewMovie();
   };
   const handleHeartButtonOnClick = async () => {
     if (movie && !likedMovies.some((m) => m.IMDBId === movie.IMDBId)) {
-      await addMovieToLikedMovies(movie?.IMDBId);
+      await addMovieToLikedMovies(movie.IMDBId);
     }
     setNewMovie();
   };
   const handlSceneitXButtonOnClick = async () => {
     if (movie && !seenMovies.some((m) => m.IMDBId === movie.IMDBId)) {
-      await addMovieToSeenMovies(movie?.IMDBId);
+      await addMovieToSeenMovies(movie.IMDBId);
     }
     setNewMovie();
   };

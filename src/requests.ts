@@ -1,8 +1,8 @@
-import { IMovies } from "./interfaces";
+import { API } from "./constant";
 
 export const getMovies = async () => {
   try {
-    const response = await fetch("http://localhost:1337/api/movies");
+    const response = await fetch(`${API}/movies`);
 
     const data = await response.json();
     return data;
@@ -12,7 +12,7 @@ export const getMovies = async () => {
 };
 export const postDislikedMovies = async (movieId: string | undefined) => {
   try {
-    const response = await fetch("http://localhost:1337/api/disliked-movies", {
+    const response = await fetch(`${API}/disliked-movies`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -27,7 +27,7 @@ export const postDislikedMovies = async (movieId: string | undefined) => {
 };
 export const getDislikedMovies = async () => {
   try {
-    const response = await fetch("http://localhost:1337/api/disliked-movies");
+    const response = await fetch(`${API}/disliked-movies`);
 
     const data = await response.json();
     return data;
@@ -37,7 +37,7 @@ export const getDislikedMovies = async () => {
 };
 export const postLikedMovies = async (movieId: string | undefined) => {
   try {
-    const response = await fetch("http://localhost:1337/api/liked-movies", {
+    const response = await fetch(`${API}/liked-movies`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -52,7 +52,7 @@ export const postLikedMovies = async (movieId: string | undefined) => {
 };
 export const getLikedMovies = async () => {
   try {
-    const response = await fetch("http://localhost:1337/api/liked-movies");
+    const response = await fetch(`${API}/liked-movies`);
 
     const data = await response.json();
     return data;
@@ -62,7 +62,7 @@ export const getLikedMovies = async () => {
 };
 export const postSeenMovies = async (movieId: string | undefined) => {
   try {
-    const response = await fetch("http://localhost:1337/api/seen-movies", {
+    const response = await fetch(`${API}/seen-movies`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -77,7 +77,7 @@ export const postSeenMovies = async (movieId: string | undefined) => {
 };
 export const getSeenMovies = async () => {
   try {
-    const response = await fetch("http://localhost:1337/api/seen-movies");
+    const response = await fetch(`${API}/seen-movies`);
 
     const data = await response.json();
     return data;
