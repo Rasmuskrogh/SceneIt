@@ -2,9 +2,9 @@ import { createContext, useContext } from "react";
 import { AuthContextType } from "../../interfaces";
 
 export const AuthContext = createContext<AuthContextType>({
-  user: null,
+  userData: null,
   isLoading: false,
-  setUser: () => {},
+  setUserData: () => {},
 });
 
 export const useAuthContext = () => useContext(AuthContext);

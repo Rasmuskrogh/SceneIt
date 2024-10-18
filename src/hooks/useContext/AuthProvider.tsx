@@ -1,7 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AuthContext } from "./AuthContext";
 import { API, BEARER } from "../../constant";
-import { useEffect } from "react";
 import { getToken } from "../../helpers";
 import { AuthProviderProps, UserData } from "../../interfaces";
 
@@ -17,30 +16,36 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
       const response = await fetch(`${API}/users/me`, {
         headers: { Authorization: `${BEARER} ${token}` },
       });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch user data");
+      }
       const data: UserData = await response.json();
 
       setUserData(data);
     } catch (error) {
-      console.error(error);
+      console.error("Error fetching user data: ", error);
       //message.error("Error While Getting Logged In User Details");
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleUser = (user: UserData | null) => {
-    setUserData(user);
-  };
-
   useEffect(() => {
     if (authToken) {
       fetchLoggedInUser(authToken);
+    } else {
+      setIsLoading(false);
     }
-  }, [authToken]);
+  }, []);
 
   return (
     <AuthContext.Provider
-      value={{ user: userData, setUser: handleUser, isLoading }}
+      value={{
+        userData /* : userData */,
+        setUserData /* : handleUser */,
+        isLoading,
+      }}
     >
       {children}
     </AuthContext.Provider>

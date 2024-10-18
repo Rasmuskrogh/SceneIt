@@ -1,3 +1,5 @@
+import "../css/filter.css";
+
 function Filter() {
   return <div className="wrapper">Filter</div>;
 }

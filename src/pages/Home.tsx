@@ -23,17 +23,8 @@ function Home() {
 
   const setNewMovie = () => {
     const allViewedMovies = [...dislikedMovies, ...likedMovies, ...seenMovies];
-    console.log("All viewed movies", allViewedMovies);
-
-    /*    if (allViewedMovies.length >= movies.length) {
-      setMovie(null);
-      console.log("All movies viewed, no more movies to show.");
-      return;
-    }
- */
 
     if (allViewedMovies.length === 0) {
-      console.log("No viewed movies yet, using full movies array.");
       setMovie(movies[Math.floor(Math.random() * movies.length)]);
       return;
     }
@@ -44,8 +35,6 @@ function Home() {
         (movie ? movie.IMDBId !== movie?.IMDBId : true) */
     );
 
-    console.log("Unviewed movies", unviewedMovies);
-
     if (unviewedMovies.length > 0) {
       const singleMovieIndex = Math.floor(
         Math.random() * unviewedMovies.length
@@ -53,7 +42,6 @@ function Home() {
       setMovie(unviewedMovies[singleMovieIndex]);
     } else {
       setMovie(null);
-      console.log("no more movies!");
     }
   };
 
@@ -78,10 +66,8 @@ function Home() {
 
   useEffect(() => {
     if (movies.length > 0) {
-      console.log("Movies loaded", movies);
       setNewMovie();
     } else {
-      console.log("No movies avaliable");
     }
   }, [movies]);
 

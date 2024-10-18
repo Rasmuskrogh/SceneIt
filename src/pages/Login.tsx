@@ -1,18 +1,18 @@
 import { useState } from "react";
 import Form from "../components/Form";
-
-import "../css/login.css";
 import { useAuthContext } from "../hooks/useContext/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { LoginFormData } from "../interfaces";
 import { API } from "../constant";
 import { setToken } from "../helpers";
 
+import "../css/login.css";
+
 function Login() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
 
-  const { setUser } = useAuthContext();
+  const { setUserData } = useAuthContext();
   const navigate = useNavigate();
 
   const fields = [
@@ -48,8 +48,10 @@ function Login() {
           throw new Error("An error occurred. Please try again later.");
         }
       }
-      setToken(data.jwt);
-      setUser(data.user);
+      setToken(await data.jwt);
+      setUserData(await data.user);
+      console.log("User data set in context:", data.user);
+
       navigate("/");
     } catch (error: any) {
       setError(

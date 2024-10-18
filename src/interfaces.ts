@@ -28,6 +28,8 @@ export interface IFromFields {
   name: string;
   type: string;
   required: boolean;
+  value?: string;
+  handleChangeInputValues?: (e:React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export interface IForm<T> {
@@ -36,6 +38,17 @@ export interface IForm<T> {
   onSubmit: (values: T) => void;
   type: String;
   buttonValue: string;
+  isEditable?: boolean;
+  toggleEdit?: () => void;
+
+}
+
+export interface IAccountFormData {
+  firstName: string;
+  lastName: string;
+  username: string;
+  email: string;
+  password: string;
 }
 
 export interface UserData {
@@ -48,9 +61,9 @@ export interface UserData {
 }
 
 export interface AuthContextType {
-  user: UserData | null;
+  userData: UserData | null;
   isLoading: boolean;
-  setUser: (user: UserData | null) => void;
+  setUserData: (user: UserData | null) => void;
 }
 
 export interface AuthProviderProps {

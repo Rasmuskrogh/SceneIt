@@ -12,7 +12,7 @@ function Register() {
   const [isLoading, setisLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
 
-  const { setUser } = useAuthContext();
+  const { setUserData } = useAuthContext();
   const navigate = useNavigate();
 
   const fields = [
@@ -47,7 +47,7 @@ function Register() {
         throw new Error(data.error.message);
       } else {
         setToken(data.jwt);
-        setUser(data.user);
+        setUserData(data.user);
         navigate("/auth/login", { replace: true });
       }
     } catch (error: any) {

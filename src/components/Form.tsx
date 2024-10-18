@@ -1,17 +1,18 @@
 import { IForm } from "../interfaces";
 import Edit from "../assets/edit.svg";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import "../css/form.css";
 
-function Form<T>({ title, fields, onSubmit, type, buttonValue }: IForm<T>) {
-  const [edit, setEdit] = useState<boolean>(false);
-
-  const toggleEdit = () => {
-    setEdit((prev) => !prev);
-  };
-
+function Form<T>({
+  title,
+  fields,
+  onSubmit,
+  type,
+  buttonValue,
+  isEditable,
+  toggleEdit,
+}: IForm<T>) {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData: Record<string, any> = {};
@@ -33,7 +34,7 @@ function Form<T>({ title, fields, onSubmit, type, buttonValue }: IForm<T>) {
         <div className="form-title-account">
           <h1>{title}</h1>
           <button className="form-edit-button" onClick={toggleEdit}>
-            <img src={Edit} alt="tbd" />
+            <img src={Edit} alt="edit" />
           </button>
         </div>
       ) : (
@@ -49,12 +50,15 @@ function Form<T>({ title, fields, onSubmit, type, buttonValue }: IForm<T>) {
             type={field.type}
             name={field.name}
             required={field.required}
+            defaultValue={field.value}
+            onChange={field.handleChangeInputValues}
+            readOnly={type === "account" && !isEditable}
           />
         </div>
       ))}
       <div className="form-button-wrapper">
         {type === "account" ? (
-          edit ? (
+          isEditable ? (
             <input className="form-submit" type="submit" value={buttonValue} />
           ) : (
             ""

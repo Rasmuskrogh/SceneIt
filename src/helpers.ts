@@ -1,7 +1,9 @@
 import { AUTH_TOKEN } from "./constant";
 
 export const getToken = (): string | null => {
-  return localStorage.getItem(AUTH_TOKEN);
+  const token = localStorage.getItem(AUTH_TOKEN);
+
+  return token;
 };
 
 export const setToken = (token: string): void => {
