@@ -5,7 +5,8 @@ import "../css/account.css";
 import { useAuthContext } from "../hooks/useContext/AuthContext";
 import { IAccountFormData } from "../interfaces";
 import { API, BEARER } from "../constant";
-import { getToken } from "../helpers";
+import { getToken, removeToken } from "../helpers";
+import { useNavigate } from "react-router-dom";
 
 function Account() {
   const [isEditable, setIsEditable] = useState<boolean>(false);
@@ -17,13 +18,11 @@ function Account() {
     password: "",
   });
   const { userData } = useAuthContext();
-  /*  console.log(userData); */
+  const navigate = useNavigate();
 
   const authToken: string | null = getToken();
 
-  const updateAccount = async (
-    /* token: string | null */ formData: IAccountFormData
-  ) => {
+  const updateAccount = async (formData: IAccountFormData) => {
     if (!authToken || !userData) {
       console.error("No token found, cannot update account");
       return;
@@ -66,6 +65,12 @@ function Account() {
       ...prevData,
       [name]: value,
     }));
+  };
+
+  const logoutUser = () => {
+    removeToken();
+    console.log("button clicked");
+    navigate("/auth/login");
   };
 
   useEffect(() => {
@@ -128,22 +133,26 @@ function Account() {
   ];
 
   return (
-    <section className="wrapper">
+    <section className="wrapper account-section">
       <section className="account-information-section">
         <Form
           title="Account information"
           fields={fields}
-          onSubmit={(
-            /* e: React.FormEvent<HTMLFormElement> */ formData: IAccountFormData
-          ) => {
-            /*  e.preventDefault(); */
-            updateAccount(/* authToken */ formData);
+          onSubmit={(formData: IAccountFormData) => {
+            updateAccount(formData);
           }}
           isEditable={isEditable}
           toggleEdit={toggleEdit}
           buttonValue="Save"
           type="account"
         />
+      </section>
+      <section className="logout-section">
+        <div className="button-wrapper">
+          <button onClick={logoutUser} className="logout-button">
+            Logout
+          </button>
+        </div>
       </section>
     </section>
   );

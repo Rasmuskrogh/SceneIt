@@ -21,6 +21,7 @@ export const postDislikedMovies = async (movieId: string | undefined) => {
         },
       }),
     });
+    console.log(response);
   } catch (error) {
     console.log(error);
   }
@@ -46,6 +47,7 @@ export const postLikedMovies = async (movieId: string | undefined) => {
         },
       }),
     });
+    console.log(response);
   } catch (error) {
     console.log(error);
   }
@@ -71,6 +73,7 @@ export const postSeenMovies = async (movieId: string | undefined) => {
         },
       }),
     });
+    console.log(response);
   } catch (error) {
     console.log(error);
   }

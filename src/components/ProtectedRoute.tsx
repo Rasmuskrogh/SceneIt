@@ -8,11 +8,11 @@ function ProtectedRoute() {
     return <div>Loading...</div>;
   }
 
-  setTimeout(() => {
-    if (!userData) {
-      return <Navigate to="/auth/login" replace />;
-    }
-  }, 500);
+  /*  setTimeout(() => { */
+  if (!userData) {
+    return <Navigate to="/auth/login" replace />;
+  }
+  /*  }, 500); */
 
   return <Outlet />;
 }

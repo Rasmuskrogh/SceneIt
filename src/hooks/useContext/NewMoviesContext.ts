@@ -14,7 +14,7 @@ export const NewMoviesContext = createContext<{
   likedMovies: [],
   dislikedMovies: [],
   seenMovies: [],
-  addMovieToDislikedMovies: async (movieId: string | undefined) => {},
-  addMovieToSeenMovies: async (movieId: string | undefined) => {},
-  addMovieToLikedMovies: async (movieId: string | undefined) => {},
+  addMovieToDislikedMovies: async (/* movieId: string | undefined */) => {},
+  addMovieToSeenMovies: async (/* movieId: string | undefined */) => {},
+  addMovieToLikedMovies: async (/* movieId: string | undefined */) => {},
 });

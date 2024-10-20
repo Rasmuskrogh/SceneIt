@@ -1,4 +1,3 @@
-import React from "react";
 import Film from "../assets/film.svg";
 import Filter from "../assets/filter.svg";
 import { Link } from "react-router-dom";
