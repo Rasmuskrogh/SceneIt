@@ -65,7 +65,8 @@ function Home() {
   };
 
   useEffect(() => {
-    if (movies.length > 0) {
+    console.log("Movies:", movies);
+    if (movies && movies.length > 0) {
       setNewMovie();
     } else {
     }
@@ -77,10 +78,16 @@ function Home() {
 
   return (
     <>
-      {movie && (
+      {movie ? (
         <section className="wrapper home-section">
           <aside className="home-image-container">
-            <img className="home-image" src={movie.Poster} alt={movie.Title} />
+            {movie.Poster && (
+              <img
+                className="home-image"
+                src={movie.Poster}
+                alt={movie.Title}
+              />
+            )}
             <Button
               ClassName="x-button home-button"
               Label={X}
@@ -99,28 +106,30 @@ function Home() {
             />
           </aside>
           <article className="home-content-container">
-            <h1 className="home-title">{movie.Title}</h1>
+            <h1 className="home-title">
+              {movie.Title || "No title avaliable"}
+            </h1>
             <div>
               <h2 className="home-sub-headings">Summary:</h2>
-              <p>{movie.Summary}</p>
+              <p>{movie.Summary || "No summary avaliable"}</p>
             </div>
             <div>
               <h2 className="home-sub-headings">Genre:</h2>
-              <p>{movie.Genre}</p>
+              <p>{movie.Genre || "No genre avaliable"}</p>
             </div>
             <div>
               <h2 className="home-sub-headings">Director:</h2>
-              <p>{movie.Director}</p>
+              <p>{movie.Director || "No director avaliable"}</p>
             </div>
             <div>
               <h2 className="home-sub-headings">Actors:</h2>
-              <p>{movie.Actors}</p>
+              <p>{movie.Actors || "No actors avaliable"}</p>
             </div>
             <div>
               <h2 className="home-sub-headings">Ratings:</h2>
               <span className="home-ratings">
                 IMDB:
-                <p>{movie.IMDBRating} / 10</p>
+                <p>{movie.IMDBRating || "No IMDB rating avalialbr"} / 10</p>
               </span>
               {movie.RottenTomatoesRating && (
                 <span className="home-ratings">
@@ -130,8 +139,7 @@ function Home() {
             </div>
           </article>
         </section>
-      )}
-      {!movie && (
+      ) : (
         <section className="wrapper home-section">
           <h2 className="home-fallback-text">
             You have already seen all avaliable movies
