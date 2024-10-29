@@ -104,6 +104,7 @@ function Movies() {
             Summary={movie.Summary}
             IMDBRating={movie.IMDBRating}
             RottenTomatoesRating={movie.RottenTomatoesRating}
+            ActiveButton={activeButton}
           />
         ))}
       </section>

@@ -57,7 +57,7 @@ function Home() {
     }
     setNewMovie();
   };
-  const handlSceneitXButtonOnClick = async () => {
+  const handleSceneitXButtonOnClick = async () => {
     if (movie && !seenMovies.some((m) => m.IMDBId === movie.IMDBId)) {
       await addMovieToSeenMovies(movie.IMDBId);
     }
@@ -97,7 +97,7 @@ function Home() {
             <Button
               ClassName="sceneit-button home-button"
               Label="Scene It!"
-              OnClick={handlSceneitXButtonOnClick}
+              OnClick={handleSceneitXButtonOnClick}
             />
             <Button
               ClassName="heart-button home-button"

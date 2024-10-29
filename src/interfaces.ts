@@ -29,7 +29,7 @@ export interface IFromFields {
   type: string;
   required: boolean;
   value?: string;
-  handleChangeInputValues?: (e:React.ChangeEvent<HTMLInputElement>) => void;
+  handleChangeInputValues?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export interface IForm<T> {
@@ -40,7 +40,6 @@ export interface IForm<T> {
   buttonValue: string;
   isEditable?: boolean;
   toggleEdit?: () => void;
-
 }
 
 export interface IAccountFormData {
@@ -80,4 +79,8 @@ export interface RegisterFormData {
 export interface LoginFormData {
   username: string;
   password: string;
+}
+
+export interface IListMovieProps extends IMovies {
+  ActiveButton: number;
 }
