@@ -71,7 +71,7 @@ function Home() {
   };
 
   useEffect(() => {
-    console.log("Movies:", movies);
+    console.log("Movies the console log?:", movies);
     if (movies?.length) {
       setLoading(false);
       setNewMovie();
