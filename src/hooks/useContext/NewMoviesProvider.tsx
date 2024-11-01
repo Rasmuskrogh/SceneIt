@@ -146,13 +146,14 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const fetchMovies = async () => {
       const moviesData = await getMovies();
+      console.log(moviesData);
       const dislikedMoviesData = await getDislikedMovies();
       const likedMoviesData = await getLikedMovies();
       const SeenMoviesData = await getSeenMovies();
       setDislikedMovies(dislikedMoviesData.data);
       setSeenMovies(SeenMoviesData.data);
       setLikedMovies(likedMoviesData.data);
-      setMovies(moviesData.data.attributes);
+      setMovies(moviesData.data);
     };
     fetchMovies();
   }, []);
