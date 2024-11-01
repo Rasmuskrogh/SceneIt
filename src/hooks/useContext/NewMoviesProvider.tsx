@@ -152,7 +152,7 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
       setDislikedMovies(dislikedMoviesData.data);
       setSeenMovies(SeenMoviesData.data);
       setLikedMovies(likedMoviesData.data);
-      setMovies(moviesData.data);
+      setMovies(moviesData.data.attributes);
     };
     fetchMovies();
   }, []);
