@@ -70,6 +70,10 @@ function Home() {
     setNewMovie();
   };
 
+  console.log(
+    "makeing sure my console.logs are even shown? Do my changes get pushed??"
+  );
+
   useEffect(() => {
     console.log("Movies the console log?:", movies);
     if (movies?.length) {
