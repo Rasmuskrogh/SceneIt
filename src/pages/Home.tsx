@@ -23,18 +23,19 @@ function Home() {
   } = useContext(NewMoviesContext);
 
   const setNewMovie = () => {
-    console.log("inside setNewMovie");
+    console.log("Running setNewMovie function");
     const allViewedMovies = [...dislikedMovies, ...likedMovies, ...seenMovies];
 
     if (allViewedMovies.length === 0) {
-      setMovie(movies[Math.floor(Math.random() * movies.length)]);
+      const randomMovie = movies[Math.floor(Math.random() * movies.length)];
+      console.log("Setting random movie", randomMovie);
+      setMovie(randomMovie);
       return;
     }
 
     const unviewedMovies = movies.filter(
       (movie) =>
-        !allViewedMovies.some((viewed) => viewed.IMDBId === movie.IMDBId) /* &&
-        (movie ? movie.IMDBId !== movie?.IMDBId : true) */
+        !allViewedMovies.some((viewed) => viewed.IMDBId === movie.IMDBId)
     );
 
     if (unviewedMovies.length > 0) {
@@ -42,7 +43,7 @@ function Home() {
         Math.random() * unviewedMovies.length
       );
       const randomMovie = unviewedMovies[singleMovieIndex];
-      console.log("Setting new movie", randomMovie);
+      console.log("Setting unviewed movie", randomMovie);
       setMovie(randomMovie);
     } else {
       console.log("All movies viewed");
@@ -76,10 +77,9 @@ function Home() {
 
   useEffect(() => {
     console.log("Movies the console log?:", movies);
-    if (movies?.length) {
+    if (movies.length > 0 && loading) {
       setLoading(false);
       setNewMovie();
-    } else {
     }
   }, [movies]);
 
