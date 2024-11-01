@@ -149,15 +149,30 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
       console.log(moviesData.data[0].attributes);
       const dislikedMoviesData = await getDislikedMovies();
       const likedMoviesData = await getLikedMovies();
-      const SeenMoviesData = await getSeenMovies();
-      setDislikedMovies(dislikedMoviesData.data);
-      setSeenMovies(SeenMoviesData.data);
-      setLikedMovies(likedMoviesData.data);
+      const seenMoviesData = await getSeenMovies();
       if (moviesData && moviesData.data) {
         const extractedMovies = moviesData.data.map(
           (movie: any) => movie.attributes
         );
         setMovies(extractedMovies);
+      }
+      if (dislikedMoviesData && dislikedMoviesData.data) {
+        const extractedMovies = dislikedMoviesData.data.map(
+          (movie: any) => movie.attributes
+        );
+        setDislikedMovies(extractedMovies);
+      }
+      if (seenMoviesData && seenMoviesData.data) {
+        const extractedMovies = seenMoviesData.data.map(
+          (movie: any) => movie.attributes
+        );
+        setSeenMovies(extractedMovies);
+      }
+      if (likedMoviesData && likedMoviesData.data) {
+        const extractedMovies = likedMoviesData.data.map(
+          (movie: any) => movie.attributes
+        );
+        setLikedMovies(extractedMovies);
       }
     };
     fetchMovies();
