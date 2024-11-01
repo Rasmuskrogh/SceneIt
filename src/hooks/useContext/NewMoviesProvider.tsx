@@ -10,7 +10,6 @@ import {
   postLikedMovies,
   postSeenMovies,
 } from "../../requests";
-import { log } from "console";
 
 function NewMoviesProvider({ children }: { children: React.ReactNode }) {
   const [movies, setMovies] = useState<IMovies[]>([]);

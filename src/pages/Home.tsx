@@ -22,6 +22,7 @@ function Home() {
   } = useContext(NewMoviesContext);
 
   const setNewMovie = () => {
+    console.log("inside setNewMovie");
     const allViewedMovies = [...dislikedMovies, ...likedMovies, ...seenMovies];
 
     if (allViewedMovies.length === 0) {
