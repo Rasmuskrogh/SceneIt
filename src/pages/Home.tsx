@@ -23,6 +23,7 @@ function Home() {
   } = useContext(NewMoviesContext);
 
   const setNewMovie = () => {
+    if (movies.length === 0) return;
     console.log("Running setNewMovie function");
     const allViewedMovies = [...dislikedMovies, ...likedMovies, ...seenMovies];
 
@@ -76,7 +77,7 @@ function Home() {
   );
 
   useEffect(() => {
-    console.log("Movies the console log?:", movies);
+    console.log("Movies array:", movies);
     if (movies.length > 0 && loading) {
       setLoading(false);
       setNewMovie();
