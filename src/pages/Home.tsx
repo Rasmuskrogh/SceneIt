@@ -10,6 +10,7 @@ import "../css/home.css";
 function Home() {
   const [movie, setMovie] = useState<IMovies | null>(null);
   const [] = useState();
+  const [loading, setLoading] = useState<boolean>(true);
 
   const {
     movies,
@@ -40,8 +41,12 @@ function Home() {
       const singleMovieIndex = Math.floor(
         Math.random() * unviewedMovies.length
       );
-      setMovie(unviewedMovies[singleMovieIndex]);
+      const randomMovie = unviewedMovies[singleMovieIndex];
+      console.log("Setting new movie", randomMovie);
+      setMovie(randomMovie);
     } else {
+      console.log("All movies viewed");
+
       setMovie(null);
     }
   };
@@ -67,7 +72,8 @@ function Home() {
 
   useEffect(() => {
     console.log("Movies:", movies);
-    if (movies && movies.length > 0) {
+    if (movies?.length) {
+      setLoading(false);
       setNewMovie();
     } else {
     }
@@ -79,7 +85,9 @@ function Home() {
 
   return (
     <>
-      {movie ? (
+      {loading ? (
+        <h2 className="home-fallback-text">Loading movies...</h2>
+      ) : movie ? (
         <section className="wrapper home-section">
           <aside className="home-image-container">
             {movie.Poster && (
