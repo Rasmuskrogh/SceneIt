@@ -24,12 +24,9 @@ function Home() {
 
   const setNewMovie = () => {
     if (movies.length === 0) return;
-    console.log("Running setNewMovie function");
     const allViewedMovies = [...dislikedMovies, ...likedMovies, ...seenMovies];
-
     if (allViewedMovies.length === 0) {
       const randomMovie = movies[Math.floor(Math.random() * movies.length)];
-      console.log("Setting random movie", randomMovie);
       setMovie(randomMovie);
       return;
     }
@@ -72,12 +69,7 @@ function Home() {
     setNewMovie();
   };
 
-  console.log(
-    "makeing sure my console.logs are even shown? Do my changes get pushed??"
-  );
-
   useEffect(() => {
-    console.log("Movies array:", movies);
     if (movies.length > 0 && loading) {
       setLoading(false);
       setNewMovie();

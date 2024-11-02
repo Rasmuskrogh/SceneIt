@@ -34,7 +34,7 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
             "this is disliked movies when added to the disliked movies state",
             dislikedMovies
           );
-        });
+        }, 2000);
       } catch (error) {
         console.log(error);
       }
