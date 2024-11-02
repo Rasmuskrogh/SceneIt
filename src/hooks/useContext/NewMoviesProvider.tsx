@@ -24,25 +24,19 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
           postDislikedMovies(movieId),
           getDislikedMovies(),
         ]);
-        setTimeout(() => {
-          console.log("disliked movies values", values);
-          console.log("disliked movies values[1]", values[1]);
-          console.log("disliked movies values[1].data", values[1].data);
-          console.log(
-            "disliked movies values[1].data.attributes",
-            values[1].data?.[0]?.attributes.IMDBId
-          );
-        }, 1000);
+        console.log(
+          "disliked movies values[1].data.attributes",
+          values[1].data?.[0]?.attributes
+        );
 
         const dislikedMoviesData =
-          (await values[1].data.map((movie: any) => movie.attributes)) || [];
+          values[1].data.map((movie: any) => movie.attributes) || [];
         setDislikedMovies(dislikedMoviesData);
-        setTimeout(() => {
-          console.log(
-            "this is disliked movies when added to the disliked movies state with attributes this time",
-            dislikedMovies
-          );
-        }, 2000);
+
+        console.log(
+          "this is disliked movies when added to the disliked movies state with attributes this time",
+          dislikedMovies
+        );
       } catch (error) {
         console.log(error);
       }
@@ -54,8 +48,14 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
           postLikedMovies(movieId),
           getLikedMovies(),
         ]);
-        console.log(values[1].data);
-        setLikedMovies(values[1].data);
+        console.log(
+          "liked movies values[1].data.attributes",
+          values[1].data?.[0]?.attributes
+        );
+
+        const likedMoviesData =
+          values[1].data.map((movie: any) => movie.attributes) || [];
+        setLikedMovies(likedMoviesData);
       } catch (error) {
         console.log(error);
       }
@@ -68,8 +68,14 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
           postSeenMovies(movieId),
           getSeenMovies(),
         ]);
-        console.log(values[1].data);
-        setSeenMovies(values[1].data);
+        console.log(
+          "seen movies values[1].data.attributes",
+          values[1].data?.[0]?.attributes
+        );
+
+        const seenMoviesData =
+          values[1].data.map((movie: any) => movie.attributes) || [];
+        setSeenMovies(seenMoviesData);
       } catch (error) {
         console.log(error);
       }
