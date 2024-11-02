@@ -34,6 +34,8 @@ function Movies() {
   };
 
   useEffect(() => {
+    console.log("does this happen?");
+
     const updateMovieLists = () => {
       setLikedMovieList();
       setDislikedMovieList();

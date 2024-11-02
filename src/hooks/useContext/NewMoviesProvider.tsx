@@ -26,7 +26,7 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
         ]);
         console.log(
           "this is disliked from the database with the new added movie",
-          values[1].data
+          values[1].data.attributes
         );
         setDislikedMovies(await values[1].data);
         setTimeout(() => {
