@@ -34,7 +34,9 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
           );
         }, 1000);
 
-        setDislikedMovies(await values[1].data);
+        const dislikedMoviesData =
+          (await values[1].data.map((movie: any) => movie.attributes)) || [];
+        setDislikedMovies(dislikedMoviesData);
         setTimeout(() => {
           console.log(
             "this is disliked movies when added to the disliked movies state with attributes this time",
