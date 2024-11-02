@@ -24,13 +24,15 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
           postDislikedMovies(movieId),
           getDislikedMovies(),
         ]);
-        console.log("disliked movies values", values);
-        console.log("disliked movies values[1]", values[1]);
-        console.log("disliked movies values[1].data", values[1].data);
-        console.log(
-          "disliked movies values[1].data.attributes",
-          values[1].data.attributes
-        );
+        setTimeout(() => {
+          console.log("disliked movies values", values);
+          console.log("disliked movies values[1]", values[1]);
+          console.log("disliked movies values[1].data", values[1].data);
+          console.log(
+            "disliked movies values[1].data.attributes",
+            values[1].data.attributes
+          );
+        }, 1000);
 
         setDislikedMovies(await values[1].data);
         setTimeout(() => {
