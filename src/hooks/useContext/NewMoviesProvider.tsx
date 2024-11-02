@@ -30,7 +30,7 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
           console.log("disliked movies values[1].data", values[1].data);
           console.log(
             "disliked movies values[1].data.attributes",
-            values[1].data.attributes[0].attributes.IMDBId
+            values[1].data[0].attributes.IMDBId
           );
         }, 1000);
 
