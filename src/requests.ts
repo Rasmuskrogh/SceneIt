@@ -96,9 +96,24 @@ export const getSeenMovies = async () => {
     console.log(error);
   }
 };
-/* export const postUser = async () => {
-
-} */
+export const deleteMovie = async (
+  listName: string,
+  id: number
+): Promise<void> => {
+  try {
+    const response = await fetch(`${API}/${listName}/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error(`Failed to delete movie with ID: ${id} from ${listName}`);
+    }
+  } catch (error) {
+    console.error(`Error deleting movie from ${listName}:`, error);
+  }
+};
 // export const getMovies = async () => {
 
 // }

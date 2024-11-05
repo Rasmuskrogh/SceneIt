@@ -20,6 +20,7 @@ function Home() {
     addMovieToDislikedMovies,
     addMovieToLikedMovies,
     addMovieToSeenMovies,
+    resetAllLists,
   } = useContext(NewMoviesContext);
 
   const setNewMovie = () => {
@@ -67,6 +68,10 @@ function Home() {
       await addMovieToSeenMovies(movie.IMDBId);
     }
     setNewMovie();
+  };
+
+  const handleResetButton = () => {
+    resetAllLists();
   };
 
   useEffect(() => {
@@ -146,10 +151,16 @@ function Home() {
           </article>
         </section>
       ) : (
-        <section className="wrapper home-section">
+        <section className="wrapper home-fallback-section">
           <h2 className="home-fallback-text">
             You have already seen all avaliable movies
           </h2>
+          <button
+            onClick={handleResetButton}
+            className="home-reset-filters-button"
+          >
+            Reset lists
+          </button>
         </section>
       )}
     </>

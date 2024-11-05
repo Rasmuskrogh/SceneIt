@@ -86,5 +86,12 @@ export interface IListMovieProps extends IMovies {
 }
 
 export interface IMovie {
-  attributes?: IMovies
+  id?: number;
+  attributes?: IMovies;
+}
+
+export interface IMovieList {
+  allSeenMovies: IMovie[];
+  allLikedMovies: IMovie[];
+  allDislikedMovies: IMovie[];
 }

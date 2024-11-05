@@ -84,9 +84,31 @@
   }
 }
 
+.home-fallback-section {
+  display: flex;
+  padding: 0 3rem;
+  flex-direction: column;
+  align-items: center;
+}
+
 .home-fallback-text {
   width: 100%;
   text-align: center;
   color: white;
-  padding-top: 3rem;
+  padding: 3rem 0;
+}
+
+.home-reset-filters-button {
+  padding: 0.5rem 1.5rem;
+  background-color: #1e1e1e;
+  color: white;
+  border: white 2px solid;
+  border-radius: 50px;
+  font-size: 1.4rem;
+}
+
+.home-reset-filters-button:hover {
+  background-color: lightgray;
+  color: #1e1e1e;
+  border: #1e1e1e 2px solid;
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { NewMoviesContext } from "./NewMoviesContext";
-import { IMovies } from "../../interfaces";
+import { IMovie, IMovies } from "../../interfaces";
 import {
   getDislikedMovies,
   getLikedMovies,
@@ -9,6 +9,7 @@ import {
   postDislikedMovies,
   postLikedMovies,
   postSeenMovies,
+  deleteMovie,
 } from "../../requests";
 
 function NewMoviesProvider({ children }: { children: React.ReactNode }) {
@@ -79,6 +80,54 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
       } catch (error) {
         console.log(error);
       }
+  };
+
+  const getAllViewedMovies = async () => {
+    try {
+      const [allSeenMovies, allLikedMovies, allDislikedMovies] =
+        await Promise.all([
+          getSeenMovies(),
+          getLikedMovies(),
+          getDislikedMovies(),
+        ]);
+      return {
+        "seen-movies": allSeenMovies.data,
+        "liked-movies": allLikedMovies.data,
+        "disliked-movies": allDislikedMovies.data,
+      };
+    } catch (error) {
+      console.error("Error fetching movie lists:", error);
+    }
+  };
+
+  const resetAllLists = async () => {
+    const movieLists = await getAllViewedMovies();
+
+    console.log("Movie lists fetched:", movieLists);
+
+    if (!movieLists) {
+      console.error("No lists found to empty");
+      return;
+    }
+
+    const deleteRequests: Promise<void>[] = [];
+
+    for (const [listName, movies] of Object.entries(movieLists)) {
+      (movies as IMovie[]).forEach((movie) => {
+        const id = movie.id;
+        if (id) {
+          console.log(`Preparing to delete movie: ${id}, from ${listName}`);
+
+          deleteRequests.push(deleteMovie(listName, id));
+        }
+      });
+    }
+
+    await Promise.all(deleteRequests);
+    setDislikedMovies([]);
+    setLikedMovies([]);
+    setSeenMovies([]);
+    console.log("All movies from all lists have been deleted");
   };
 
   const moveToDisliked = (
@@ -169,7 +218,6 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const fetchMovies = async () => {
       const moviesData = await getMovies();
-      console.log(moviesData.data[0].attributes);
       const dislikedMoviesData = await getDislikedMovies();
       const likedMoviesData = await getLikedMovies();
       const seenMoviesData = await getSeenMovies();
@@ -211,6 +259,7 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
         addMovieToDislikedMovies,
         addMovieToLikedMovies,
         addMovieToSeenMovies,
+        resetAllLists,
         moveToDisliked,
         moveToLiked,
         moveToSeen,
