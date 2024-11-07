@@ -21,23 +21,22 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
   const addMovieToDislikedMovies = async (movieId: string | undefined) => {
     if (movieId)
       try {
-        const values = await Promise.all([
-          postDislikedMovies(movieId),
-          getDislikedMovies(),
-        ]);
-        console.log(
+        await postDislikedMovies(movieId);
+        const values = await getDislikedMovies();
+
+        /* console.log(
           "disliked movies values[1].data.attributes",
           values[1].data?.[0]?.attributes
-        );
+        ); */
 
         const dislikedMoviesData =
-          values[1].data.map((movie: any) => movie.attributes) || [];
+          values.data.map((movie: any) => movie.attributes) || [];
         setDislikedMovies(dislikedMoviesData);
 
-        console.log(
+        /* console.log(
           "this is disliked movies when added to the disliked movies state with attributes this time",
           dislikedMovies
-        );
+        ); */
       } catch (error) {
         console.log(error);
       }
@@ -45,17 +44,10 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
   const addMovieToLikedMovies = async (movieId: string | undefined) => {
     if (movieId)
       try {
-        const values = await Promise.all([
-          postLikedMovies(movieId),
-          getLikedMovies(),
-        ]);
-        console.log(
-          "liked movies values[1].data.attributes",
-          values[1].data?.[0]?.attributes
-        );
-
+        await postLikedMovies(movieId);
+        const values = await getLikedMovies();
         const likedMoviesData =
-          values[1].data.map((movie: any) => movie.attributes) || [];
+          values.data.map((movie: any) => movie.attributes) || [];
         setLikedMovies(likedMoviesData);
       } catch (error) {
         console.log(error);
@@ -65,17 +57,10 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
   const addMovieToSeenMovies = async (movieId: string | undefined) => {
     if (movieId)
       try {
-        const values = await Promise.all([
-          postSeenMovies(movieId),
-          getSeenMovies(),
-        ]);
-        console.log(
-          "seen movies values[1].data.attributes",
-          values[1].data?.[0]?.attributes
-        );
-
+        await postSeenMovies(movieId);
+        const values = await getSeenMovies();
         const seenMoviesData =
-          values[1].data.map((movie: any) => movie.attributes) || [];
+          values.data.map((movie: any) => movie.attributes) || [];
         setSeenMovies(seenMoviesData);
       } catch (error) {
         console.log(error);
@@ -103,7 +88,7 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
   const resetAllLists = async () => {
     const movieLists = await getAllViewedMovies();
 
-    console.log("Movie lists fetched:", movieLists);
+    /* console.log("Movie lists fetched:", movieLists); */
 
     if (!movieLists) {
       console.error("No lists found to empty");
@@ -116,8 +101,8 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
       (movies as IMovie[]).forEach((movie) => {
         const id = movie.id;
         if (id) {
-          console.log(`Preparing to delete movie: ${id}, from ${listName}`);
-
+          /*  console.log(`Preparing to delete movie: ${id}, from ${listName}`);
+           */
           deleteRequests.push(deleteMovie(listName, id));
         }
       });
@@ -127,7 +112,7 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
     setDislikedMovies([]);
     setLikedMovies([]);
     setSeenMovies([]);
-    console.log("All movies from all lists have been deleted");
+    /*     console.log("All movies from all lists have been deleted"); */
   };
 
   const moveToDisliked = (

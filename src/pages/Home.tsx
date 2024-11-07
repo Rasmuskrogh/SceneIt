@@ -25,10 +25,17 @@ function Home() {
 
   const setNewMovie = () => {
     if (movies.length === 0) return;
+    console.log("disliked movies in setNewMovie", dislikedMovies);
+    console.log("liked movies in setNewMovie", likedMovies);
+    console.log("seen movies in setNewMovie", seenMovies);
     const allViewedMovies = [...dislikedMovies, ...likedMovies, ...seenMovies];
     if (allViewedMovies.length === 0) {
       const randomMovie = movies[Math.floor(Math.random() * movies.length)];
+      console.log("first set", randomMovie);
+
+      console.log("movie before setMovie", movie);
       setMovie(randomMovie);
+      console.log("movie after setMovie", movie);
       return;
     }
 
@@ -36,34 +43,42 @@ function Home() {
       (movie) =>
         !allViewedMovies.some((viewed) => viewed.IMDBId === movie.IMDBId)
     );
+    console.log("unviewed movies in setNewMovies", unviewedMovies);
 
     if (unviewedMovies.length > 0) {
       const singleMovieIndex = Math.floor(
         Math.random() * unviewedMovies.length
       );
       const randomMovie = unviewedMovies[singleMovieIndex];
-      console.log("Setting unviewed movie", randomMovie);
+      console.log("Setting unviewed movie later", randomMovie);
+      console.log("movie before setMovie", movie);
       setMovie(randomMovie);
+      console.log("movie after setMovie", movie);
     } else {
       console.log("All movies viewed");
-
+      console.log("movie before setMovie in else", movie);
       setMovie(null);
+      console.log("movie after setMovie en else", movie);
     }
   };
 
   const handleXButtonOnClick = async () => {
+    console.log("X clicked");
+
     if (movie && !dislikedMovies.some((m) => m.IMDBId === movie.IMDBId)) {
       await addMovieToDislikedMovies(movie.IMDBId);
     }
     setNewMovie();
   };
   const handleHeartButtonOnClick = async () => {
+    console.log("<3 clicked");
     if (movie && !likedMovies.some((m) => m.IMDBId === movie.IMDBId)) {
       await addMovieToLikedMovies(movie.IMDBId);
     }
     setNewMovie();
   };
-  const handleSceneitXButtonOnClick = async () => {
+  const handleSceneitButtonOnClick = async () => {
+    console.log("SceneIt clicked");
     if (movie && !seenMovies.some((m) => m.IMDBId === movie.IMDBId)) {
       await addMovieToSeenMovies(movie.IMDBId);
     }
@@ -75,6 +90,8 @@ function Home() {
   };
 
   useEffect(() => {
+    console.log("movielist changed");
+
     if (movies.length > 0 && loading) {
       setLoading(false);
       setNewMovie();
@@ -108,7 +125,7 @@ function Home() {
             <Button
               ClassName="sceneit-button home-button"
               Label="Scene It!"
-              OnClick={handleSceneitXButtonOnClick}
+              OnClick={handleSceneitButtonOnClick}
             />
             <Button
               ClassName="heart-button home-button"

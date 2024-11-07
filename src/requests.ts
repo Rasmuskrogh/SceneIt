@@ -35,6 +35,7 @@ export const getDislikedMovies = async () => {
       throw new Error("Network response was not ok disliked-movies");
     }
     const data = await response.json();
+
     return data;
   } catch (error) {
     console.log(error);
@@ -63,6 +64,8 @@ export const getLikedMovies = async () => {
       throw new Error("Network response was not ok liked-movies");
     }
     const data = await response.json();
+    console.log(response);
+    console.log(data);
     return data;
   } catch (error) {
     console.log(error);

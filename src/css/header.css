@@ -7,6 +7,7 @@
   height: 5rem;
   padding: 0 2rem;
   position: fixed;
+  z-index: 3;
 }
 
 .header-logo-link {
