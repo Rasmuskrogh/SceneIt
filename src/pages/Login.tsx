@@ -69,9 +69,11 @@ function Login() {
 
   if (!backendReady) {
     return (
-      <div>
-        Please wait while backend it starting up. It lies dormant while the app
-        is not beeing used.
+      <div className="backend-not-ready">
+        <p>
+          Please wait while backend it starting up. <br /> It lies dormant while
+          the app is not beeing used.
+        </p>
       </div>
     );
   }

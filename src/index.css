@@ -34,3 +34,15 @@ h5,
 h6 {
   font-weight: normal;
 }
+
+.backend-not-ready {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  color: white;
+  font-family: "Itim", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
