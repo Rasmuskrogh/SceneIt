@@ -66,8 +66,10 @@ function Register() {
     return (
       <div className="backend-not-ready">
         <p>
-          Please wait while backend it starting up. <br /> It lies dormant while
-          the app is not beeing used.
+          Please wait while for the backend to start up. <br /> This may take a
+          couple of minutes. <br />
+          The backend and database lies dormant while the app is not beeing
+          used.
         </p>
       </div>
     );
