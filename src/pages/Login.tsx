@@ -7,6 +7,7 @@ import { API } from "../constant";
 import { setToken } from "../helpers";
 
 import "../css/login.css";
+import useBackendStatus from "../hooks/useBackendStatus";
 
 function Login() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -14,6 +15,10 @@ function Login() {
 
   const { setUserData } = useAuthContext();
   const navigate = useNavigate();
+
+  const { backendReady } = useBackendStatus(
+    `${API.replace("/api", "")}/admin/_health`
+  );
 
   const fields = [
     { label: "Username", name: "username", type: "text", required: true },
@@ -61,6 +66,15 @@ function Login() {
       setIsLoading(false);
     }
   };
+
+  if (!backendReady) {
+    return (
+      <div>
+        Please wait while backend it starting up. It lies dormant while the app
+        is not beeing used.
+      </div>
+    );
+  }
 
   return (
     <section className="login-section">
