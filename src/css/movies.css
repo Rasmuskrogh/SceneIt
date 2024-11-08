@@ -22,3 +22,10 @@
 .movies-list-item {
   color: white;
 }
+
+.movies-fallback-text {
+  color: white;
+  text-align: center;
+  padding-top: 2rem;
+  font-size: 2.5rem;
+}

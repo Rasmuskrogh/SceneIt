@@ -93,23 +93,27 @@ function Movies() {
           Seen
         </button>
       </nav>
-      <section className="movies-list-item">
-        {activeList.map((movie) => (
-          <ListMovie
-            key={movie.IMDBId}
-            IMDBId={movie.IMDBId}
-            Poster={movie.Poster}
-            Title={movie.Title}
-            Genre={movie.Genre}
-            Director={movie.Director}
-            Actors={movie.Actors}
-            Summary={movie.Summary}
-            IMDBRating={movie.IMDBRating}
-            RottenTomatoesRating={movie.RottenTomatoesRating}
-            ActiveButton={activeButton}
-          />
-        ))}
-      </section>
+      {activeList.length !== 0 ? (
+        <section className="movies-list-item">
+          {activeList.map((movie) => (
+            <ListMovie
+              key={movie.IMDBId}
+              IMDBId={movie.IMDBId}
+              Poster={movie.Poster}
+              Title={movie.Title}
+              Genre={movie.Genre}
+              Director={movie.Director}
+              Actors={movie.Actors}
+              Summary={movie.Summary}
+              IMDBRating={movie.IMDBRating}
+              RottenTomatoesRating={movie.RottenTomatoesRating}
+              ActiveButton={activeButton}
+            />
+          ))}
+        </section>
+      ) : (
+        <h2 className="movies-fallback-text">No movies in this list yet</h2>
+      )}
     </div>
   );
 }
