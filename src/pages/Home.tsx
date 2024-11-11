@@ -23,6 +23,8 @@ function Home() {
     resetAllLists,
   } = useContext(NewMoviesContext);
 
+  console.log(movies);
+
   const setNewMovie = () => {
     if (movies.length === 0) return;
     console.log("disliked movies in setNewMovie", dislikedMovies);
