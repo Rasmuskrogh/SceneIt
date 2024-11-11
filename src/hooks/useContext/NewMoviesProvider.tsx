@@ -23,20 +23,11 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
       try {
         await postDislikedMovies(movieId);
         const values = await getDislikedMovies();
-
-        console.log(
-          "disliked movies values[1].data.attributes",
-          values[1].data?.[0]?.attributes
-        );
-
         const dislikedMoviesData =
           values.data.map((movie: any) => movie.attributes) || [];
-        setDislikedMovies(dislikedMoviesData);
+        console.log("dislikedMoviesData:", dislikedMoviesData);
 
-        /* console.log(
-          "this is disliked movies when added to the disliked movies state with attributes this time",
-          dislikedMovies
-        ); */
+        setDislikedMovies(dislikedMoviesData);
       } catch (error) {
         console.log(error);
       }
