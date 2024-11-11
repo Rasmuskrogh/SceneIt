@@ -200,7 +200,7 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
       ]);
   };
 
-  const deleteMovieFromList = async (
+  /* const deleteMovieFromList = async (
     movieId: string | undefined,
     activeButton: number | undefined
   ) => {
@@ -211,7 +211,7 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
     } else {
       getSeenMovies();
     }
-  };
+  }; */
 
   useEffect(() => {
     const fetchMovies = async () => {
