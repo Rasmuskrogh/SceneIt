@@ -32,6 +32,8 @@ function ListMovie({
     moveToSeen(IMDBId, ActiveButton);
   };
 
+  const handleDeletefromList = () => {};
+
   return (
     <article className="listMovie-acticle">
       <div className="listMovie-poster-ul-wrapper">
@@ -126,18 +128,27 @@ function ListMovie({
         </div>
         {ActiveButton === 0 ? (
           <div>
-            <button className="listMovies-trashcan">
+            <button
+              onClick={handleDeletefromList}
+              className="listMovies-trashcan"
+            >
               <img src={Trashcan} alt="" />
             </button>
           </div>
         ) : (
           <div>
             {ActiveButton === 1 ? (
-              <button className="listMovies-trashcan">
+              <button
+                onClick={handleDeletefromList}
+                className="listMovies-trashcan"
+              >
                 <img src={Trashcan} alt="" />
               </button>
             ) : (
-              <button className="listMovies-trashcan">
+              <button
+                onClick={handleDeletefromList}
+                className="listMovies-trashcan"
+              >
                 <img src={Trashcan} alt="" />
               </button>
             )}

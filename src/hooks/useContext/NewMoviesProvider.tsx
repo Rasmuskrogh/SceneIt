@@ -24,10 +24,10 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
         await postDislikedMovies(movieId);
         const values = await getDislikedMovies();
 
-        /* console.log(
+        console.log(
           "disliked movies values[1].data.attributes",
           values[1].data?.[0]?.attributes
-        ); */
+        );
 
         const dislikedMoviesData =
           values.data.map((movie: any) => movie.attributes) || [];
@@ -198,6 +198,19 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
           Summary: "",
         },
       ]);
+  };
+
+  const deleteMovieFromList = async (
+    movieId: string | undefined,
+    activeButton: number | undefined
+  ) => {
+    if (activeButton === 0) {
+      getLikedMovies();
+    } else if (activeButton === 1) {
+      getDislikedMovies();
+    } else {
+      getSeenMovies();
+    }
   };
 
   useEffect(() => {
