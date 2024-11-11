@@ -2,7 +2,7 @@ import { API } from "./constant";
 
 export const getMovies = async () => {
   try {
-    const response = await fetch(`${API}/movies`);
+    const response = await fetch(`${API}/movies?pagination[limit]=100`);
     if (!response.ok) {
       throw new Error("Network response was not ok, getmovies");
     }
@@ -30,7 +30,9 @@ export const postDislikedMovies = async (movieId: string | undefined) => {
 };
 export const getDislikedMovies = async () => {
   try {
-    const response = await fetch(`${API}/disliked-movies`);
+    const response = await fetch(
+      `${API}/disliked-movies?pagination[limit]=100`
+    );
     if (!response.ok) {
       throw new Error("Network response was not ok disliked-movies");
     }
@@ -59,7 +61,7 @@ export const postLikedMovies = async (movieId: string | undefined) => {
 };
 export const getLikedMovies = async () => {
   try {
-    const response = await fetch(`${API}/liked-movies`);
+    const response = await fetch(`${API}/liked-movies?pagination[limit]=100`);
     if (!response.ok) {
       throw new Error("Network response was not ok liked-movies");
     }
@@ -89,7 +91,7 @@ export const postSeenMovies = async (movieId: string | undefined) => {
 };
 export const getSeenMovies = async () => {
   try {
-    const response = await fetch(`${API}/seen-movies`);
+    const response = await fetch(`${API}/seen-movies?pagination[limit]=100`);
     if (!response.ok) {
       throw new Error("Network response was not ok seen-movies");
     }
