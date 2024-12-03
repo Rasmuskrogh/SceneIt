@@ -1,4 +1,7 @@
-import { API } from "./constant";
+import { API, BEARER } from "./constant";
+import { getToken } from "./helpers";
+
+const token: string | null = getToken();
 
 export const getMovies = async () => {
   try {
@@ -12,27 +15,51 @@ export const getMovies = async () => {
     console.log(error);
   }
 };
-export const postDislikedMovies = async (movieId: string | undefined) => {
+export const postDislikedMovies = async (
+  movieId: string | undefined,
+  userId: number | undefined
+) => {
+  console.log(token);
+
   try {
     const response = await fetch(`${API}/disliked-movies`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${BEARER} ${token}`,
+      },
       body: JSON.stringify({
         data: {
           IMDBId: movieId,
+          User: {
+            connect: [userId],
+          },
         },
       }),
     });
-    console.log(response);
+    console.log("dislikedMovies post response", response);
   } catch (error) {
     console.log(error);
   }
 };
-export const getDislikedMovies = async () => {
+export const getDislikedMovies = async (userId: number | undefined) => {
   try {
+    if (!userId) {
+      throw new Error("Invalid userId provided");
+    }
+    if (!token) {
+      throw new Error("Authorization token is missing or invalid");
+    }
     const response = await fetch(
-      `${API}/disliked-movies?pagination[limit]=100`
+      `${API}/disliked-movies?pagination[limit]=100&filters[User][id][$eq]=${userId}`,
+      {
+        headers: {
+          Authorization: `${BEARER} ${token}`,
+        },
+      }
     );
+    console.log(response);
+
     if (!response.ok) {
       throw new Error("Network response was not ok disliked-movies");
     }

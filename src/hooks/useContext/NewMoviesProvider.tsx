@@ -11,6 +11,7 @@ import {
   postSeenMovies,
   deleteMovie,
 } from "../../requests";
+import { useAuthContext } from "./AuthContext";
 
 function NewMoviesProvider({ children }: { children: React.ReactNode }) {
   const [movies, setMovies] = useState<IMovies[]>([]);
@@ -18,11 +19,16 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
   const [likedMovies, setLikedMovies] = useState<IMovies[]>([]);
   const [seenMovies, setSeenMovies] = useState<IMovies[]>([]);
 
+  const { userData } = useAuthContext();
+  let userId: number | undefined = userData?.id;
+
+  console.log("USERID!!", typeof userId, userId);
+
   const addMovieToDislikedMovies = async (movieId: string | undefined) => {
-    if (movieId)
+    if (movieId && userId)
       try {
-        await postDislikedMovies(movieId);
-        const values = await getDislikedMovies();
+        await postDislikedMovies(movieId, userId);
+        const values = await getDislikedMovies(userId);
         const dislikedMoviesData =
           values.data.map((movie: any) => movie.attributes) || [];
         console.log("dislikedMoviesData:", dislikedMoviesData);
@@ -64,7 +70,7 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
         await Promise.all([
           getSeenMovies(),
           getLikedMovies(),
-          getDislikedMovies(),
+          getDislikedMovies(userId),
         ]);
       return {
         "seen-movies": allSeenMovies.data,
@@ -207,7 +213,7 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const fetchMovies = async () => {
       const moviesData = await getMovies();
-      const dislikedMoviesData = await getDislikedMovies();
+      const dislikedMoviesData = await getDislikedMovies(userId);
       const likedMoviesData = await getLikedMovies();
       const seenMoviesData = await getSeenMovies();
       if (moviesData && moviesData.data) {
