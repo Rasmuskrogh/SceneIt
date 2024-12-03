@@ -26,10 +26,12 @@ function Home() {
   console.log(movies);
 
   const setNewMovie = () => {
+
     if (movies.length === 0) return;
     console.log("disliked movies in setNewMovie", dislikedMovies);
     console.log("liked movies in setNewMovie", likedMovies);
     console.log("seen movies in setNewMovie", seenMovies);
+
     const allViewedMovies = [...dislikedMovies, ...likedMovies, ...seenMovies];
     if (allViewedMovies.length === 0) {
       const randomMovie = movies[Math.floor(Math.random() * movies.length)];
@@ -59,6 +61,7 @@ function Home() {
     } else {
       console.log("All movies viewed");
       console.log("movie before setMovie in else", movie);
+
       setMovie(null);
       console.log("movie after setMovie en else", movie);
     }
@@ -87,6 +90,7 @@ function Home() {
     setNewMovie();
   };
 
+
   const handleResetButton = () => {
     resetAllLists();
   };
@@ -95,6 +99,7 @@ function Home() {
     console.log("movielist changed");
 
     if (movies.length > 0 && loading) {
+
       setLoading(false);
       setNewMovie();
     }
