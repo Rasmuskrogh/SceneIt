@@ -1,8 +1,11 @@
-import { API } from "./constant";
+import { API, BEARER } from "./constant";
+import { getToken } from "./helpers";
+
+const token: string | null = getToken();
 
 export const getMovies = async () => {
   try {
-    const response = await fetch(`${API}/movies`);
+    const response = await fetch(`${API}/movies?pagination[limit]=100`);
     if (!response.ok) {
       throw new Error("Network response was not ok, getmovies");
     }
@@ -12,29 +15,56 @@ export const getMovies = async () => {
     console.log(error);
   }
 };
-export const postDislikedMovies = async (movieId: string | undefined) => {
+export const postDislikedMovies = async (
+  movieId: string | undefined,
+  userId: number | undefined
+) => {
+  console.log(token);
+
   try {
     const response = await fetch(`${API}/disliked-movies`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${BEARER} ${token}`,
+      },
       body: JSON.stringify({
         data: {
           IMDBId: movieId,
+          User: {
+            connect: [userId],
+          },
         },
       }),
     });
-    console.log(response);
+    console.log("dislikedMovies post response", response);
   } catch (error) {
     console.log(error);
   }
 };
-export const getDislikedMovies = async () => {
+export const getDislikedMovies = async (userId: number | undefined) => {
   try {
-    const response = await fetch(`${API}/disliked-movies`);
+    if (!userId) {
+      throw new Error("Invalid userId provided");
+    }
+    if (!token) {
+      throw new Error("Authorization token is missing or invalid");
+    }
+    const response = await fetch(
+      `${API}/disliked-movies?pagination[limit]=100&filters[User][id][$eq]=${userId}`,
+      {
+        headers: {
+          Authorization: `${BEARER} ${token}`,
+        },
+      }
+    );
+    console.log(response);
+
     if (!response.ok) {
       throw new Error("Network response was not ok disliked-movies");
     }
     const data = await response.json();
+
     return data;
   } catch (error) {
     console.log(error);
@@ -58,11 +88,13 @@ export const postLikedMovies = async (movieId: string | undefined) => {
 };
 export const getLikedMovies = async () => {
   try {
-    const response = await fetch(`${API}/liked-movies`);
+    const response = await fetch(`${API}/liked-movies?pagination[limit]=100`);
     if (!response.ok) {
       throw new Error("Network response was not ok liked-movies");
     }
     const data = await response.json();
+    console.log(response);
+    console.log(data);
     return data;
   } catch (error) {
     console.log(error);
@@ -86,7 +118,7 @@ export const postSeenMovies = async (movieId: string | undefined) => {
 };
 export const getSeenMovies = async () => {
   try {
-    const response = await fetch(`${API}/seen-movies`);
+    const response = await fetch(`${API}/seen-movies?pagination[limit]=100`);
     if (!response.ok) {
       throw new Error("Network response was not ok seen-movies");
     }
@@ -96,9 +128,24 @@ export const getSeenMovies = async () => {
     console.log(error);
   }
 };
-/* export const postUser = async () => {
-
-} */
+export const deleteMovie = async (
+  listName: string,
+  id: number
+): Promise<void> => {
+  try {
+    const response = await fetch(`${API}/${listName}/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error(`Failed to delete movie with ID: ${id} from ${listName}`);
+    }
+  } catch (error) {
+    console.error(`Error deleting movie from ${listName}:`, error);
+  }
+};
 // export const getMovies = async () => {
 
 // }

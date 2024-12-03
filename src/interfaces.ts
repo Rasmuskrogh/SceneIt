@@ -84,3 +84,14 @@ export interface LoginFormData {
 export interface IListMovieProps extends IMovies {
   ActiveButton: number;
 }
+
+export interface IMovie {
+  id?: number;
+  attributes?: IMovies;
+}
+
+export interface IMovieList {
+  allSeenMovies: IMovie[];
+  allLikedMovies: IMovie[];
+  allDislikedMovies: IMovie[];
+}

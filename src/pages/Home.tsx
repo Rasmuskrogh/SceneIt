@@ -20,66 +20,88 @@ function Home() {
     addMovieToDislikedMovies,
     addMovieToLikedMovies,
     addMovieToSeenMovies,
+    resetAllLists,
   } = useContext(NewMoviesContext);
 
-  const setNewMovie = () => {
-    console.log("inside setNewMovie");
-    const allViewedMovies = [...dislikedMovies, ...likedMovies, ...seenMovies];
+  console.log(movies);
 
+  const setNewMovie = () => {
+
+    if (movies.length === 0) return;
+    console.log("disliked movies in setNewMovie", dislikedMovies);
+    console.log("liked movies in setNewMovie", likedMovies);
+    console.log("seen movies in setNewMovie", seenMovies);
+
+    const allViewedMovies = [...dislikedMovies, ...likedMovies, ...seenMovies];
     if (allViewedMovies.length === 0) {
-      setMovie(movies[Math.floor(Math.random() * movies.length)]);
+      const randomMovie = movies[Math.floor(Math.random() * movies.length)];
+      console.log("first set", randomMovie);
+
+      console.log("movie before setMovie", movie);
+      setMovie(randomMovie);
+      console.log("movie after setMovie", movie);
       return;
     }
 
     const unviewedMovies = movies.filter(
       (movie) =>
-        !allViewedMovies.some((viewed) => viewed.IMDBId === movie.IMDBId) /* &&
-        (movie ? movie.IMDBId !== movie?.IMDBId : true) */
+        !allViewedMovies.some((viewed) => viewed.IMDBId === movie.IMDBId)
     );
+    console.log("unviewed movies in setNewMovies", unviewedMovies);
 
     if (unviewedMovies.length > 0) {
       const singleMovieIndex = Math.floor(
         Math.random() * unviewedMovies.length
       );
       const randomMovie = unviewedMovies[singleMovieIndex];
-      console.log("Setting new movie", randomMovie);
+      console.log("Setting unviewed movie later", randomMovie);
+      console.log("movie before setMovie", movie);
       setMovie(randomMovie);
+      console.log("movie after setMovie", movie);
     } else {
       console.log("All movies viewed");
+      console.log("movie before setMovie in else", movie);
 
       setMovie(null);
+      console.log("movie after setMovie en else", movie);
     }
   };
 
   const handleXButtonOnClick = async () => {
+    console.log("X clicked");
+
     if (movie && !dislikedMovies.some((m) => m.IMDBId === movie.IMDBId)) {
       await addMovieToDislikedMovies(movie.IMDBId);
     }
     setNewMovie();
   };
   const handleHeartButtonOnClick = async () => {
+    console.log("<3 clicked");
     if (movie && !likedMovies.some((m) => m.IMDBId === movie.IMDBId)) {
       await addMovieToLikedMovies(movie.IMDBId);
     }
     setNewMovie();
   };
-  const handleSceneitXButtonOnClick = async () => {
+  const handleSceneitButtonOnClick = async () => {
+    console.log("SceneIt clicked");
     if (movie && !seenMovies.some((m) => m.IMDBId === movie.IMDBId)) {
       await addMovieToSeenMovies(movie.IMDBId);
     }
     setNewMovie();
   };
 
-  console.log(
-    "makeing sure my console.logs are even shown? Do my changes get pushed??"
-  );
+
+  const handleResetButton = () => {
+    resetAllLists();
+  };
 
   useEffect(() => {
-    console.log("Movies the console log?:", movies);
-    if (movies?.length) {
+    console.log("movielist changed");
+
+    if (movies.length > 0 && loading) {
+
       setLoading(false);
       setNewMovie();
-    } else {
     }
   }, [movies]);
 
@@ -110,7 +132,7 @@ function Home() {
             <Button
               ClassName="sceneit-button home-button"
               Label="Scene It!"
-              OnClick={handleSceneitXButtonOnClick}
+              OnClick={handleSceneitButtonOnClick}
             />
             <Button
               ClassName="heart-button home-button"
@@ -153,10 +175,16 @@ function Home() {
           </article>
         </section>
       ) : (
-        <section className="wrapper home-section">
+        <section className="wrapper home-fallback-section">
           <h2 className="home-fallback-text">
             You have already seen all avaliable movies
           </h2>
+          <button
+            onClick={handleResetButton}
+            className="home-reset-filters-button"
+          >
+            Reset lists
+          </button>
         </section>
       )}
     </>

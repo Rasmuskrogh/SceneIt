@@ -27,6 +27,13 @@
   letter-spacing: 1px;
 }
 
+.listmovies-buttons-div-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
 .listMovie-buttons-div {
   padding: 0 2rem 0 3rem;
   align-self: center;

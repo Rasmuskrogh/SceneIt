@@ -32,6 +32,8 @@ function ListMovie({
     moveToSeen(IMDBId, ActiveButton);
   };
 
+  const handleDeletefromList = () => {};
+
   return (
     <article className="listMovie-acticle">
       <div className="listMovie-poster-ul-wrapper">
@@ -83,60 +85,70 @@ function ListMovie({
           </li>
         </ul>
       </div>
-      <div className="listMovie-buttons-div">
-        <h3 className="listMovie-h3">Move to:</h3>
-        {ActiveButton === 0 && (
-          <div className="listMovie-active-buttons-div">
-            <button
-              className="listMovie-buttons"
-              onClick={handleMoveToDisliked}
-            >
-              Disliked
-            </button>
-            <button className="listMovie-buttons" onClick={handleMoveToSeen}>
-              Seen
-            </button>
-          </div>
-        )}
+      <div className="listmovies-buttons-div-wrapper">
+        <div className="listMovie-buttons-div">
+          <h3 className="listMovie-h3">Move to:</h3>
+          {ActiveButton === 0 && (
+            <div className="listMovie-active-buttons-div">
+              <button
+                className="listMovie-buttons"
+                onClick={handleMoveToDisliked}
+              >
+                Disliked
+              </button>
+              <button className="listMovie-buttons" onClick={handleMoveToSeen}>
+                Seen
+              </button>
+            </div>
+          )}
+          {ActiveButton === 1 && (
+            <div className="listMovie-active-buttons-div">
+              <button className="listMovie-buttons" onClick={handleMoveToLiked}>
+                Liked
+              </button>
+              <button className="listMovie-buttons" onClick={handleMoveToSeen}>
+                Seen
+              </button>
+            </div>
+          )}
 
-        {ActiveButton === 1 && (
-          <div className="listMovie-active-buttons-div">
-            <button className="listMovie-buttons" onClick={handleMoveToLiked}>
-              Liked
-            </button>
-            <button className="listMovie-buttons" onClick={handleMoveToSeen}>
-              Seen
-            </button>
-          </div>
-        )}
-
-        {ActiveButton === 2 && (
-          <div className="listMovie-active-buttons-div">
-            <button className="listMovie-buttons" onClick={handleMoveToLiked}>
-              Liked
-            </button>
-            <button
-              className="listMovie-buttons"
-              onClick={handleMoveToDisliked}
-            >
-              Disliked
-            </button>
-          </div>
-        )}
+          {ActiveButton === 2 && (
+            <div className="listMovie-active-buttons-div">
+              <button className="listMovie-buttons" onClick={handleMoveToLiked}>
+                Liked
+              </button>
+              <button
+                className="listMovie-buttons"
+                onClick={handleMoveToDisliked}
+              >
+                Disliked
+              </button>
+            </div>
+          )}
+        </div>
         {ActiveButton === 0 ? (
           <div>
-            <button className="listMovies-trashcan">
+            <button
+              onClick={handleDeletefromList}
+              className="listMovies-trashcan"
+            >
               <img src={Trashcan} alt="" />
             </button>
           </div>
         ) : (
           <div>
             {ActiveButton === 1 ? (
-              <button className="listMovies-trashcan">
+              <button
+                onClick={handleDeletefromList}
+                className="listMovies-trashcan"
+              >
                 <img src={Trashcan} alt="" />
               </button>
             ) : (
-              <button className="listMovies-trashcan">
+              <button
+                onClick={handleDeletefromList}
+                className="listMovies-trashcan"
+              >
                 <img src={Trashcan} alt="" />
               </button>
             )}

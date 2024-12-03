@@ -82,3 +82,16 @@
   font-style: normal;
   font-size: 1.2rem;
 }
+
+@media (width < 550px) {
+  .form-form {
+    margin: 0 2rem;
+    width: auto;
+  }
+}
+
+@media (width < 351px) {
+  .form-link-texts {
+    font-size: 1.1rem;
+  }
+}

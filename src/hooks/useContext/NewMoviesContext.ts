@@ -9,6 +9,7 @@ export const NewMoviesContext = createContext<{
   addMovieToLikedMovies: (movieId: string | undefined) => Promise<void>;
   addMovieToSeenMovies: (movieId: string | undefined) => Promise<void>;
   addMovieToDislikedMovies: (movieId: string | undefined) => Promise<void>;
+  resetAllLists: () => Promise<void>;
   moveToDisliked: (
     movieId: string | undefined,
     ActiveButton: number | undefined
@@ -29,6 +30,7 @@ export const NewMoviesContext = createContext<{
   addMovieToDislikedMovies: async (/* movieId: string | undefined */) => {},
   addMovieToSeenMovies: async (/* movieId: string | undefined */) => {},
   addMovieToLikedMovies: async (/* movieId: string | undefined */) => {},
+  resetAllLists: async () => {},
   moveToDisliked: async () => {},
   moveToLiked: async () => {},
   moveToSeen: async () => {},

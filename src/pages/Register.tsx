@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import "../css/register.css";
 import { API } from "../constant";
 import { setToken } from "../helpers";
+import useBackendStatus from "../hooks/useBackendStatus";
 
 function Register() {
   const [isLoading, setisLoading] = useState<boolean>(false);
@@ -14,6 +15,10 @@ function Register() {
 
   const { setUserData } = useAuthContext();
   const navigate = useNavigate();
+
+  const { backendReady } = useBackendStatus(
+    `${API.replace("/api", "")}/admin/_health`
+  );
 
   const fields = [
     { label: "Username", name: "username", type: "text", required: true },
@@ -56,6 +61,19 @@ function Register() {
       setisLoading(false);
     }
   };
+
+  if (!backendReady) {
+    return (
+      <div className="backend-not-ready">
+        <p>
+          Please wait while for the backend to start up. <br /> This may take a
+          couple of minutes. <br />
+          The backend and database lies dormant while the app is not beeing
+          used.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <section className="register-section">
