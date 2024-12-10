@@ -2,5 +2,22 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   height: 100vh;
+}
+
+.dev-message {
+  color: white;
+  margin-top: -121.8px;
+  padding-bottom: 2rem;
+}
+
+.dev-message-h1 {
+  font-size: 2rem;
+  padding-bottom: 0.3rem;
+}
+
+.dev-message-h2 {
+  padding: 0 1rem;
+  font-size: 1.3rem;
 }
