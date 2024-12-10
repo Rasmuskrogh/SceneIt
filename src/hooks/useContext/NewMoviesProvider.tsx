@@ -11,6 +11,7 @@ import {
   postSeenMovies,
   deleteMovie,
 } from "../../requests";
+
 import { useAuthContext } from "./AuthContext";
 
 function NewMoviesProvider({ children }: { children: React.ReactNode }) {
