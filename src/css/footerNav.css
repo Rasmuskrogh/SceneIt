@@ -28,3 +28,29 @@ footer {
   border-left: black 1px solid;
   border-right: black 1px solid;
 }
+
+@media (width < 750px) {
+  footer {
+    height: 5rem;
+  }
+}
+
+@media (width < 500px) {
+  footer {
+    height: 4.5rem;
+  }
+}
+
+@media (width < 450px) {
+  .footer-film > img,
+  .footer-heart > img,
+  .footer-account > img {
+    height: 1.3rem;
+  }
+}
+
+@media (width < 400px) {
+  footer {
+    height: 4rem;
+  }
+}

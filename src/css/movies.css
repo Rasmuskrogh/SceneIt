@@ -29,3 +29,36 @@
   padding-top: 2rem;
   font-size: 2.5rem;
 }
+
+@media (width < 950px) {
+  .movies-button-nav {
+    padding: 2rem 6rem;
+  }
+}
+
+@media (width < 850px) {
+  .movies-button-nav {
+    padding: 2rem 4rem;
+  }
+}
+
+@media (width < 750px) {
+  .movies-button-nav {
+    padding: 2rem 0;
+    justify-content: space-evenly;
+  }
+  .movies-buttons {
+    margin: 0.2rem;
+  }
+}
+
+@media (width < 550px) {
+  .movies-button-nav {
+    flex-direction: column;
+    padding: 1rem;
+    align-items: center;
+  }
+  .movies-buttons {
+    width: 80%;
+  }
+}

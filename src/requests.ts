@@ -42,16 +42,10 @@ export const postDislikedMovies = async (
     console.log(error);
   }
 };
-export const getDislikedMovies = async (userId: number | undefined) => {
+export const getDislikedMovies = async (/* token: string | undefined */) => {
   try {
-    if (!userId) {
-      throw new Error("Invalid userId provided");
-    }
-    if (!token) {
-      throw new Error("Authorization token is missing or invalid");
-    }
     const response = await fetch(
-      `${API}/disliked-movies?pagination[limit]=100&filters[User][id][$eq]=${userId}`,
+      `${API}/disliked-movies?pagination[limit]=100`,
       {
         headers: {
           Authorization: `${BEARER} ${token}`,
