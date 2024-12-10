@@ -78,7 +78,7 @@ function ListMovie({
             </span>
           </li>
           <li>
-            <span className="listMovie-span">
+            <span className="listMovie-span listMovie-summary">
               <h3 className="listMovie-h3">Summary:</h3>
               <p>{Summary}</p>
             </span>
