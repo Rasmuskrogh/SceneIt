@@ -29,7 +29,7 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
     if (movieId && userId)
       try {
         await postDislikedMovies(movieId, userId);
-        const values = await getDislikedMovies(userId);
+        const values = await getDislikedMovies(/* userId */);
         const dislikedMoviesData =
           values.data.map((movie: any) => movie.attributes) || [];
         console.log("dislikedMoviesData:", dislikedMoviesData);
@@ -71,7 +71,7 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
         await Promise.all([
           getSeenMovies(),
           getLikedMovies(),
-          getDislikedMovies(userId),
+          getDislikedMovies(/* userId */),
         ]);
       return {
         "seen-movies": allSeenMovies.data,
@@ -214,7 +214,7 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const fetchMovies = async () => {
       const moviesData = await getMovies();
-      const dislikedMoviesData = await getDislikedMovies(userId);
+      const dislikedMoviesData = await getDislikedMovies(/* userId */);
       const likedMoviesData = await getLikedMovies();
       const seenMoviesData = await getSeenMovies();
       if (moviesData && moviesData.data) {
