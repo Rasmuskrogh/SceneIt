@@ -70,6 +70,7 @@ function Login() {
   if (!backendReady) {
     return (
       <div className="backend-not-ready">
+        <h1>Loading...</h1>
         <p>
           Please wait while for the backend to start up. <br /> This may take a
           couple of minutes. <br />
@@ -83,6 +84,11 @@ function Login() {
   return (
     <section className="login-section">
       {error && <div className="login-error-message">{error}</div>}
+      <div className="dev-message">
+        <h1 className="dev-message-h1">Open login information:</h1>
+        <h2 className="dev-message-h2">Username: testaccount </h2>
+        <h2 className="dev-message-h2">Password: 123456</h2>
+      </div>
       <Form
         title="Login"
         fields={fields}

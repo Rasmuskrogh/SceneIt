@@ -46,6 +46,8 @@ h6 {
   font-weight: 400;
   font-style: normal;
   padding: 1rem;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 @media (width < 750px) {
