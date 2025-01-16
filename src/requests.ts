@@ -19,8 +19,6 @@ export const postDislikedMovies = async (
   movieId: string | undefined,
   userId: number | undefined
 ) => {
-  console.log(token);
-
   try {
     const response = await fetch(`${API}/disliked-movies`, {
       method: "POST",
@@ -31,13 +29,21 @@ export const postDislikedMovies = async (
       body: JSON.stringify({
         data: {
           IMDBId: movieId,
-          User: {
+          users_permissions_users: {
             connect: [userId],
+          },
+          movies: {
+            connect: [movieId],
           },
         },
       }),
     });
-    console.log("dislikedMovies post response", response);
+
+    if (response.ok) {
+      console.log("Disliked movie added successfully!");
+    } else {
+      console.log("Error in posting disliked movie", response);
+    }
   } catch (error) {
     console.log(error);
   }
@@ -45,7 +51,7 @@ export const postDislikedMovies = async (
 export const getDislikedMovies = async (/* token: string | undefined */) => {
   try {
     const response = await fetch(
-      `${API}/disliked-movies?pagination[limit]=100`,
+      `${API}/disliked-movies?pagination[limit]=100&populate=users_permissions_users,movies`,
       {
         headers: {
           Authorization: `${BEARER} ${token}`,

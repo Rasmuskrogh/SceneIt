@@ -23,15 +23,14 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
   const { userData } = useAuthContext();
   let userId: number | undefined = userData?.id;
 
-  console.log("USERID!!", typeof userId, userId);
-
   const addMovieToDislikedMovies = async (movieId: string | undefined) => {
     if (movieId && userId)
       try {
         await postDislikedMovies(movieId, userId);
         const values = await getDislikedMovies(/* userId */);
         const dislikedMoviesData =
-          values.data.map((movie: any) => movie.attributes) || [];
+          values.data.map((movie: any) => movie.attributes.movies.data[0]) ||
+          [];
         console.log("dislikedMoviesData:", dislikedMoviesData);
 
         setDislikedMovies(dislikedMoviesData);
@@ -136,6 +135,8 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
           IMDBRating: "",
           RottenTomatoesRating: 0,
           Summary: "",
+          id: "",
+          movieId: "",
         },
       ]);
   };
@@ -165,6 +166,8 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
           IMDBRating: "",
           RottenTomatoesRating: 0,
           Summary: "",
+          id: "",
+          movieId: "",
         },
       ]);
   };
@@ -194,6 +197,8 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
           IMDBRating: "",
           RottenTomatoesRating: 0,
           Summary: "",
+          id: "",
+          movieId: "",
         },
       ]);
   };
@@ -218,15 +223,17 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
       const likedMoviesData = await getLikedMovies();
       const seenMoviesData = await getSeenMovies();
       if (moviesData && moviesData.data) {
-        const extractedMovies = moviesData.data.map(
-          (movie: any) => movie.attributes
-        );
+        const extractedMovies = moviesData.data.map((movie: any) => ({
+          id: movie.id,
+          ...movie.attributes,
+        }));
         setMovies(extractedMovies);
       }
       if (dislikedMoviesData && dislikedMoviesData.data) {
         const extractedMovies = dislikedMoviesData.data.map(
-          (movie: any) => movie.attributes
+          (movie: any) => movie.attributes.movies.data[0].attributes.IMDBId
         );
+        console.log("WOLOLOLOLOLOLO", extractedMovies);
         setDislikedMovies(extractedMovies);
       }
       if (seenMoviesData && seenMoviesData.data) {

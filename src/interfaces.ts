@@ -10,6 +10,8 @@ export interface IMovies {
   RottenTomatoesRating: number;
   Poster: string;
   IMDBId: string;
+  id?: string;
+  movieId?: string;
 }
 
 export interface IButton {

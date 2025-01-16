@@ -23,10 +23,9 @@ function Home() {
     resetAllLists,
   } = useContext(NewMoviesContext);
 
-  console.log(movies);
+  // console.log(movies);
 
   const setNewMovie = () => {
-
     if (movies.length === 0) return;
     console.log("disliked movies in setNewMovie", dislikedMovies);
     console.log("liked movies in setNewMovie", likedMovies);
@@ -47,17 +46,17 @@ function Home() {
       (movie) =>
         !allViewedMovies.some((viewed) => viewed.IMDBId === movie.IMDBId)
     );
-    console.log("unviewed movies in setNewMovies", unviewedMovies);
+    // console.log("unviewed movies in setNewMovies", unviewedMovies);
 
     if (unviewedMovies.length > 0) {
       const singleMovieIndex = Math.floor(
         Math.random() * unviewedMovies.length
       );
       const randomMovie = unviewedMovies[singleMovieIndex];
-      console.log("Setting unviewed movie later", randomMovie);
-      console.log("movie before setMovie", movie);
+      // console.log("Setting unviewed movie later", randomMovie);
+      // console.log("movie before setMovie", movie);
       setMovie(randomMovie);
-      console.log("movie after setMovie", movie);
+      // console.log("movie after setMovie", movie);
     } else {
       console.log("All movies viewed");
       console.log("movie before setMovie in else", movie);
@@ -68,10 +67,14 @@ function Home() {
   };
 
   const handleXButtonOnClick = async () => {
-    console.log("X clicked");
-
     if (movie && !dislikedMovies.some((m) => m.IMDBId === movie.IMDBId)) {
-      await addMovieToDislikedMovies(movie.IMDBId);
+      const movieId = movies.find((m) => m.IMDBId === movie.IMDBId)?.id;
+
+      if (movieId) {
+        await addMovieToDislikedMovies(movieId);
+      } else {
+        console.error("Movie ID not found for the given IMDBId");
+      }
     }
     setNewMovie();
   };
@@ -90,7 +93,6 @@ function Home() {
     setNewMovie();
   };
 
-
   const handleResetButton = () => {
     resetAllLists();
   };
@@ -99,7 +101,6 @@ function Home() {
     console.log("movielist changed");
 
     if (movies.length > 0 && loading) {
-
       setLoading(false);
       setNewMovie();
     }
