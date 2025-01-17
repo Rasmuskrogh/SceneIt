@@ -79,16 +79,26 @@ function Home() {
     setNewMovie();
   };
   const handleHeartButtonOnClick = async () => {
-    console.log("<3 clicked");
     if (movie && !likedMovies.some((m) => m.IMDBId === movie.IMDBId)) {
-      await addMovieToLikedMovies(movie.IMDBId);
+      const movieId = movies.find((m) => m.IMDBId === movie.IMDBId)?.id;
+
+      if (movieId) {
+        await addMovieToLikedMovies(movieId);
+      } else {
+        console.error("Movie ID not found for the given IMDBId");
+      }
     }
     setNewMovie();
   };
   const handleSceneitButtonOnClick = async () => {
-    console.log("SceneIt clicked");
     if (movie && !seenMovies.some((m) => m.IMDBId === movie.IMDBId)) {
-      await addMovieToSeenMovies(movie.IMDBId);
+      const movieId = movies.find((m) => m.IMDBId === movie.IMDBId)?.id;
+
+      if (movieId) {
+        await addMovieToSeenMovies(movieId);
+      } else {
+        console.error("Movie ID not found for the given IMDBId");
+      }
     }
     setNewMovie();
   };
