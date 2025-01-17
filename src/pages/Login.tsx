@@ -72,8 +72,8 @@ function Login() {
       <div className="backend-not-ready">
         <h1>Loading...</h1>
         <p>
-          Please wait while for the backend to start up. <br /> This may take a
-          couple of minutes. <br />
+          Please wait for the backend to start up. <br /> This may take a couple
+          of minutes. <br />
           The backend and database lies dormant while the app is not beeing
           used.
         </p>

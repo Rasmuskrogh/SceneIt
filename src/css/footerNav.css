@@ -29,6 +29,12 @@ footer {
   border-right: black 1px solid;
 }
 
+.footer-film:hover,
+.footer-account:hover,
+.footer-heart:hover {
+  cursor: pointer;
+}
+
 @media (width < 750px) {
   footer {
     height: 5rem;

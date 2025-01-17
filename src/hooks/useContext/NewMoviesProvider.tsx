@@ -23,15 +23,15 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
   const { userData } = useAuthContext();
   let userId: number | undefined = userData?.id;
 
-  console.log("USERID!!", typeof userId, userId);
-
   const addMovieToDislikedMovies = async (movieId: string | undefined) => {
     if (movieId && userId)
       try {
         await postDislikedMovies(movieId, userId);
-        const values = await getDislikedMovies(/* userId */);
+        const values = await getDislikedMovies(userId);
         const dislikedMoviesData =
-          values.data.map((movie: any) => movie.attributes) || [];
+          values.data.map((movie: any) => ({
+            IMDBId: movie.attributes.movies.data[0].attributes.IMDBId,
+          })) || [];
         console.log("dislikedMoviesData:", dislikedMoviesData);
 
         setDislikedMovies(dislikedMoviesData);
@@ -40,12 +40,15 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
       }
   };
   const addMovieToLikedMovies = async (movieId: string | undefined) => {
-    if (movieId)
+    if (movieId && userId)
       try {
-        await postLikedMovies(movieId);
-        const values = await getLikedMovies();
+        await postLikedMovies(movieId, userId);
+        const values = await getLikedMovies(userId);
         const likedMoviesData =
-          values.data.map((movie: any) => movie.attributes) || [];
+          values.data.map((movie: any) => ({
+            IMDBId: movie.attributes.movies.data[0].attributes.IMDBId,
+          })) || [];
+        console.log("likedMoviesData", likedMoviesData);
         setLikedMovies(likedMoviesData);
       } catch (error) {
         console.log(error);
@@ -53,12 +56,14 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
   };
 
   const addMovieToSeenMovies = async (movieId: string | undefined) => {
-    if (movieId)
+    if (movieId && userId)
       try {
-        await postSeenMovies(movieId);
-        const values = await getSeenMovies();
+        await postSeenMovies(movieId, userId);
+        const values = await getSeenMovies(userId);
         const seenMoviesData =
-          values.data.map((movie: any) => movie.attributes) || [];
+          values.data.map((movie: any) => ({
+            IMDBId: movie.attributes.movies.data[0].attributes.IMDBId,
+          })) || [];
         setSeenMovies(seenMoviesData);
       } catch (error) {
         console.log(error);
@@ -69,9 +74,9 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
     try {
       const [allSeenMovies, allLikedMovies, allDislikedMovies] =
         await Promise.all([
-          getSeenMovies(),
-          getLikedMovies(),
-          getDislikedMovies(/* userId */),
+          getSeenMovies(userId),
+          getLikedMovies(userId),
+          getDislikedMovies(userId),
         ]);
       return {
         "seen-movies": allSeenMovies.data,
@@ -136,6 +141,8 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
           IMDBRating: "",
           RottenTomatoesRating: 0,
           Summary: "",
+          id: "",
+          movieId: "",
         },
       ]);
   };
@@ -165,6 +172,8 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
           IMDBRating: "",
           RottenTomatoesRating: 0,
           Summary: "",
+          id: "",
+          movieId: "",
         },
       ]);
   };
@@ -194,6 +203,8 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
           IMDBRating: "",
           RottenTomatoesRating: 0,
           Summary: "",
+          id: "",
+          movieId: "",
         },
       ]);
   };
@@ -214,31 +225,32 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const fetchMovies = async () => {
       const moviesData = await getMovies();
-      const dislikedMoviesData = await getDislikedMovies(/* userId */);
-      const likedMoviesData = await getLikedMovies();
-      const seenMoviesData = await getSeenMovies();
+      const dislikedMoviesData = await getDislikedMovies(userId);
+      const likedMoviesData = await getLikedMovies(userId);
+      const seenMoviesData = await getSeenMovies(userId);
       if (moviesData && moviesData.data) {
-        const extractedMovies = moviesData.data.map(
-          (movie: any) => movie.attributes
-        );
+        const extractedMovies = moviesData.data.map((movie: any) => ({
+          id: movie.id,
+          ...movie.attributes,
+        }));
         setMovies(extractedMovies);
       }
       if (dislikedMoviesData && dislikedMoviesData.data) {
-        const extractedMovies = dislikedMoviesData.data.map(
-          (movie: any) => movie.attributes
-        );
+        const extractedMovies = dislikedMoviesData.data.map((movie: any) => ({
+          IMDBId: movie.attributes.movies.data[0].attributes.IMDBId,
+        }));
         setDislikedMovies(extractedMovies);
       }
       if (seenMoviesData && seenMoviesData.data) {
-        const extractedMovies = seenMoviesData.data.map(
-          (movie: any) => movie.attributes
-        );
+        const extractedMovies = seenMoviesData.data.map((movie: any) => ({
+          IMDBId: movie.attributes.movies.data[0].attributes.IMDBId,
+        }));
         setSeenMovies(extractedMovies);
       }
       if (likedMoviesData && likedMoviesData.data) {
-        const extractedMovies = likedMoviesData.data.map(
-          (movie: any) => movie.attributes
-        );
+        const extractedMovies = likedMoviesData.data.map((movie: any) => ({
+          IMDBId: movie.attributes.movies.data[0].attributes.IMDBId,
+        }));
         setLikedMovies(extractedMovies);
       }
     };
