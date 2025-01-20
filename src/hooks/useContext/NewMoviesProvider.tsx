@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { NewMoviesContext } from "./NewMoviesContext";
-import { IMovie, IMovies } from "../../interfaces";
+import { IMovie, IMovies, IMinimizeMovies } from "../../interfaces";
 import {
   getDislikedMovies,
   getLikedMovies,
@@ -16,58 +16,52 @@ import { useAuthContext } from "./AuthContext";
 
 function NewMoviesProvider({ children }: { children: React.ReactNode }) {
   const [movies, setMovies] = useState<IMovies[]>([]);
-  const [dislikedMovies, setDislikedMovies] = useState<IMovies[]>([]);
-  const [likedMovies, setLikedMovies] = useState<IMovies[]>([]);
-  const [seenMovies, setSeenMovies] = useState<IMovies[]>([]);
+  const [dislikedMovies, setDislikedMovies] = useState<IMinimizeMovies[]>([]);
+  const [likedMovies, setLikedMovies] = useState<IMinimizeMovies[]>([]);
+  const [seenMovies, setSeenMovies] = useState<IMinimizeMovies[]>([]);
 
   const { userData } = useAuthContext();
   let userId: number | undefined = userData?.id;
 
   const addMovieToDislikedMovies = async (movieId: string | undefined) => {
-    if (movieId && userId)
+    if (movieId && userId) {
+      setDislikedMovies((prev) => [...prev, { IMDBId: movieId }]);
       try {
         await postDislikedMovies(movieId, userId);
-        const values = await getDislikedMovies(userId);
-        const dislikedMoviesData =
-          values.data.map((movie: any) => ({
-            IMDBId: movie.attributes.movies.data[0].attributes.IMDBId,
-          })) || [];
-        console.log("dislikedMoviesData:", dislikedMoviesData);
-
-        setDislikedMovies(dislikedMoviesData);
       } catch (error) {
         console.log(error);
+        setDislikedMovies((prev) =>
+          prev.filter((movie) => movie.IMDBId !== movieId)
+        );
       }
+    }
   };
   const addMovieToLikedMovies = async (movieId: string | undefined) => {
-    if (movieId && userId)
+    if (movieId && userId) {
+      setLikedMovies((prev) => [...prev, { IMDBId: movieId }]);
       try {
         await postLikedMovies(movieId, userId);
-        const values = await getLikedMovies(userId);
-        const likedMoviesData =
-          values.data.map((movie: any) => ({
-            IMDBId: movie.attributes.movies.data[0].attributes.IMDBId,
-          })) || [];
-        console.log("likedMoviesData", likedMoviesData);
-        setLikedMovies(likedMoviesData);
       } catch (error) {
         console.log(error);
+        setLikedMovies((prev) =>
+          prev.filter((movie) => movie.IMDBId !== movieId)
+        );
       }
+    }
   };
 
   const addMovieToSeenMovies = async (movieId: string | undefined) => {
-    if (movieId && userId)
+    if (movieId && userId) {
+      setSeenMovies((prev) => [...prev, { IMDBId: movieId }]);
       try {
         await postSeenMovies(movieId, userId);
-        const values = await getSeenMovies(userId);
-        const seenMoviesData =
-          values.data.map((movie: any) => ({
-            IMDBId: movie.attributes.movies.data[0].attributes.IMDBId,
-          })) || [];
-        setSeenMovies(seenMoviesData);
       } catch (error) {
         console.log(error);
+        setSeenMovies((prev) =>
+          prev.filter((movie) => movie.IMDBId !== movieId)
+        );
       }
+    }
   };
 
   const getAllViewedMovies = async () => {
@@ -133,7 +127,7 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
         ...prev,
         {
           IMDBId: movieId,
-          Poster: "",
+          /*  Poster: "",
           Title: "",
           Genre: "",
           Director: "",
@@ -142,7 +136,7 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
           RottenTomatoesRating: 0,
           Summary: "",
           id: "",
-          movieId: "",
+          movieId: "", */
         },
       ]);
   };
@@ -164,7 +158,7 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
         ...prev,
         {
           IMDBId: movieId,
-          Poster: "",
+          /*  Poster: "",
           Title: "",
           Genre: "",
           Director: "",
@@ -173,7 +167,7 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
           RottenTomatoesRating: 0,
           Summary: "",
           id: "",
-          movieId: "",
+          movieId: "", */
         },
       ]);
   };
@@ -195,7 +189,7 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
         ...prev,
         {
           IMDBId: movieId,
-          Poster: "",
+          /*  Poster: "",
           Title: "",
           Genre: "",
           Director: "",
@@ -204,7 +198,7 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
           RottenTomatoesRating: 0,
           Summary: "",
           id: "",
-          movieId: "",
+          movieId: "", */
         },
       ]);
   };
