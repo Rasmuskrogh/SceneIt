@@ -92,7 +92,7 @@ function Account() {
         lastName: userData.lastName || "",
         username: userData.username || "",
         email: userData.email || "",
-        password: "", // Återställ lösenord eller lämna det tomt
+        password: "",
       });
     }
   }, [userData]);

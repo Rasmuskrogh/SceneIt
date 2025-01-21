@@ -23,9 +23,12 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
   const { userData } = useAuthContext();
   let userId: number | undefined = userData?.id;
 
-  const addMovieToDislikedMovies = async (movieId: string | undefined) => {
-    if (movieId && userId) {
-      setDislikedMovies((prev) => [...prev, { IMDBId: movieId }]);
+  const addMovieToDislikedMovies = async (
+    movieId: string | undefined,
+    IMDBId: string | undefined
+  ) => {
+    if (movieId && userId && IMDBId) {
+      setDislikedMovies((prev) => [...prev, { IMDBId: IMDBId }]);
       try {
         await postDislikedMovies(movieId, userId);
       } catch (error) {
@@ -36,9 +39,14 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
       }
     }
   };
-  const addMovieToLikedMovies = async (movieId: string | undefined) => {
-    if (movieId && userId) {
-      setLikedMovies((prev) => [...prev, { IMDBId: movieId }]);
+  const addMovieToLikedMovies = async (
+    movieId: string | undefined,
+    IMDBId: string | undefined
+  ) => {
+    if (movieId && userId && IMDBId) {
+      console.log("movieId?", movieId);
+      console.log("userId?", userId);
+      setLikedMovies((prev) => [...prev, { IMDBId: IMDBId }]);
       try {
         await postLikedMovies(movieId, userId);
       } catch (error) {
@@ -50,9 +58,12 @@ function NewMoviesProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const addMovieToSeenMovies = async (movieId: string | undefined) => {
-    if (movieId && userId) {
-      setSeenMovies((prev) => [...prev, { IMDBId: movieId }]);
+  const addMovieToSeenMovies = async (
+    movieId: string | undefined,
+    IMDBId: string | undefined
+  ) => {
+    if (movieId && userId && IMDBId) {
+      setSeenMovies((prev) => [...prev, { IMDBId: IMDBId }]);
       try {
         await postSeenMovies(movieId, userId);
       } catch (error) {

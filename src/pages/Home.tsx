@@ -69,9 +69,9 @@ function Home() {
   const handleXButtonOnClick = async () => {
     if (movie && !dislikedMovies.some((m) => m.IMDBId === movie.IMDBId)) {
       const movieId = movies.find((m) => m.IMDBId === movie.IMDBId)?.id;
-
+      const IMDBId = movie.IMDBId;
       if (movieId) {
-        await addMovieToDislikedMovies(movieId);
+        await addMovieToDislikedMovies(movieId, IMDBId);
       } else {
         console.error("Movie ID not found for the given IMDBId");
       }
@@ -80,9 +80,9 @@ function Home() {
   const handleHeartButtonOnClick = async () => {
     if (movie && !likedMovies.some((m) => m.IMDBId === movie.IMDBId)) {
       const movieId = movies.find((m) => m.IMDBId === movie.IMDBId)?.id;
-
+      const IMDBId = movie.IMDBId;
       if (movieId) {
-        await addMovieToLikedMovies(movieId);
+        await addMovieToLikedMovies(movieId, IMDBId);
       } else {
         console.error("Movie ID not found for the given IMDBId");
       }
@@ -91,9 +91,9 @@ function Home() {
   const handleSceneitButtonOnClick = async () => {
     if (movie && !seenMovies.some((m) => m.IMDBId === movie.IMDBId)) {
       const movieId = movies.find((m) => m.IMDBId === movie.IMDBId)?.id;
-
+      const IMDBId = movie.IMDBId;
       if (movieId) {
-        await addMovieToSeenMovies(movieId);
+        await addMovieToSeenMovies(movieId, IMDBId);
       } else {
         console.error("Movie ID not found for the given IMDBId");
       }
