@@ -33,7 +33,11 @@ function Form<T>({
       {type === "account" ? (
         <div className="form-title-account">
           <h1>{title}</h1>
-          <button className="form-edit-button" onClick={toggleEdit}>
+          <button
+            className="form-edit-button"
+            onClick={toggleEdit}
+            type="button"
+          >
             <img src={Edit} alt="edit" />
           </button>
         </div>

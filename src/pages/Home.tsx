@@ -76,7 +76,6 @@ function Home() {
         console.error("Movie ID not found for the given IMDBId");
       }
     }
-    setNewMovie();
   };
   const handleHeartButtonOnClick = async () => {
     if (movie && !likedMovies.some((m) => m.IMDBId === movie.IMDBId)) {
@@ -88,7 +87,6 @@ function Home() {
         console.error("Movie ID not found for the given IMDBId");
       }
     }
-    setNewMovie();
   };
   const handleSceneitButtonOnClick = async () => {
     if (movie && !seenMovies.some((m) => m.IMDBId === movie.IMDBId)) {
@@ -100,7 +98,6 @@ function Home() {
         console.error("Movie ID not found for the given IMDBId");
       }
     }
-    setNewMovie();
   };
 
   const handleResetButton = () => {

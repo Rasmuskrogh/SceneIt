@@ -14,6 +14,10 @@ export interface IMovies {
   movieId?: string;
 }
 
+export interface IMinimizeMovies {
+  IMDBId: string;
+}
+
 export interface IButton {
   Label: string;
   OnClick: (e: React.MouseEvent<HTMLButtonElement>) => void;

@@ -27,6 +27,9 @@ function Account() {
       console.error("No token found, cannot update account");
       return;
     }
+    setTimeout(() => {
+      setIsEditable(false);
+    }, 200);
     try {
       const response = await fetch(`${API}/users/${userData.id}`, {
         method: "PUT",
@@ -35,8 +38,8 @@ function Account() {
           Authorization: `${BEARER} ${authToken}`,
         },
         body: JSON.stringify({
-          firstName: formData.firstName,
-          lastName: formData.lastName,
+          firstname: formData.firstName,
+          lastname: formData.lastName,
           username: formData.username,
           email: formData.email,
         }),
@@ -47,14 +50,23 @@ function Account() {
       if (!response.ok) {
         throw new Error("Failed to update account information");
       }
-
-      console.log("Updated account data", data);
+      console.log("Account succesfully updated", data);
     } catch (error) {
       console.log("Error updating account: error");
     }
   };
 
+  const handleSubmit = (formData: IAccountFormData) => {
+    if (!formData.username || !formData.email) {
+      console.error("Username and email are required");
+      return;
+    }
+
+    updateAccount(formData);
+  };
+
   const toggleEdit = () => {
+    console.log("toggleEdit triggered");
     setIsEditable((prev) => !prev);
   };
 
@@ -74,14 +86,15 @@ function Account() {
   };
 
   useEffect(() => {
-    if (userData)
+    if (userData) {
       setAccountFormData({
         firstName: userData.firstName || "",
         lastName: userData.lastName || "",
         username: userData.username || "",
         email: userData.email || "",
-        password: userData.password || "",
+        password: "", // Återställ lösenord eller lämna det tomt
       });
+    }
   }, [userData]);
 
   const fields = [
@@ -138,9 +151,7 @@ function Account() {
         <Form
           title="Account information"
           fields={fields}
-          onSubmit={(formData: IAccountFormData) => {
-            updateAccount(formData);
-          }}
+          onSubmit={(formData: IAccountFormData) => handleSubmit(formData)}
           isEditable={isEditable}
           toggleEdit={toggleEdit}
           buttonValue="Save"

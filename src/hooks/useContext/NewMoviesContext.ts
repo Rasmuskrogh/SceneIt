@@ -1,11 +1,11 @@
 import { createContext } from "react";
-import { IMovies } from "../../interfaces";
+import { IMovies, IMinimizeMovies } from "../../interfaces";
 
 export const NewMoviesContext = createContext<{
   movies: IMovies[];
-  likedMovies: IMovies[];
-  dislikedMovies: IMovies[];
-  seenMovies: IMovies[];
+  likedMovies: IMinimizeMovies[];
+  dislikedMovies: IMinimizeMovies[];
+  seenMovies: IMinimizeMovies[];
   addMovieToLikedMovies: (movieId: string | undefined) => Promise<void>;
   addMovieToSeenMovies: (movieId: string | undefined) => Promise<void>;
   addMovieToDislikedMovies: (movieId: string | undefined) => Promise<void>;
