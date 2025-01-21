@@ -6,9 +6,9 @@ export const NewMoviesContext = createContext<{
   likedMovies: IMinimizeMovies[];
   dislikedMovies: IMinimizeMovies[];
   seenMovies: IMinimizeMovies[];
-  addMovieToLikedMovies: (movieId: string | undefined) => Promise<void>;
-  addMovieToSeenMovies: (movieId: string | undefined) => Promise<void>;
-  addMovieToDislikedMovies: (movieId: string | undefined) => Promise<void>;
+  addMovieToLikedMovies: (movieId: string | undefined, IMDBId: string | undefined) => Promise<void>;
+  addMovieToSeenMovies: (movieId: string | undefined, IMDBId: string | undefined) => Promise<void>;
+  addMovieToDislikedMovies: (movieId: string | undefined, IMDBId: string | undefined) => Promise<void>;
   resetAllLists: () => Promise<void>;
   moveToDisliked: (
     movieId: string | undefined,
