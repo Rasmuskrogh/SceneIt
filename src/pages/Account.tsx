@@ -86,10 +86,11 @@ function Account() {
   };
 
   useEffect(() => {
+    console.log("userData", userData);
     if (userData) {
       setAccountFormData({
-        firstName: userData.firstName || "",
-        lastName: userData.lastName || "",
+        firstName: userData.firstname || "",
+        lastName: userData.lastname || "",
         username: userData.username || "",
         email: userData.email || "",
         password: "",

@@ -46,7 +46,7 @@ function Home() {
       (movie) =>
         !allViewedMovies.some((viewed) => viewed.IMDBId === movie.IMDBId)
     );
-    // console.log("unviewed movies in setNewMovies", unviewedMovies);
+    console.log("unviewed movies in setNewMovies", unviewedMovies);
 
     if (unviewedMovies.length > 0) {
       const singleMovieIndex = Math.floor(
