@@ -10,10 +10,11 @@ This app is under construction so there are still some parts that aren't finishe
 
 #Left to do:
 
-- Position trashcan and make functionallity for it on Movies page []
+[] Position trashcan and make functionallity for it on Movies page
+
 - A fallback text for the Movies lists []
-- The ability to choose your avaliable streamin services []
+- The ability to choose your avaliable streamin services
 - Filters []
-- Functionallity for users to have individual lists [x]
-- Zod for conditions with login and register []
-- Populate the Movies list with more movies []
+- Functionallity for users to have individual lists
+- Zod for conditions with login and register
+- Populate the Movies list with more movies
