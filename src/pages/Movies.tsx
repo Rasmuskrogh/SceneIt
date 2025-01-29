@@ -16,14 +16,11 @@ function Movies() {
     useContext(NewMoviesContext);
 
   const setDislikedMovieList = () => {
-    console.log("inside set", dislikedMovies);
     const dislikedIds = dislikedMovies.map((movie) => movie.IMDBId);
-    console.log(dislikedIds);
     setDisliked(movies.filter((movie) => dislikedIds.includes(movie.IMDBId)));
   };
 
   const setLikedMovieList = () => {
-    console.log("inside set liked", likedMovies);
     const likedIds = likedMovies.map((movie) => movie.IMDBId);
     setLiked(movies.filter((movie) => likedIds.includes(movie.IMDBId)));
   };
@@ -34,10 +31,6 @@ function Movies() {
   };
 
   useEffect(() => {
-    console.log("does this happen?");
-    console.log(dislikedMovies);
-    console.log(likedMovies);
-    console.log(seenMovies);
     const updateMovieLists = () => {
       setLikedMovieList();
       setDislikedMovieList();
@@ -60,12 +53,9 @@ function Movies() {
       }
     };
     makeCorrectListActive();
-    console.log("activeList", activeList);
   }, [activeButton, disliked, liked, seen]);
 
-  useEffect(() => {
-    console.log("Disliked updated:", dislikedMovies);
-  }, []);
+  useEffect(() => {}, []);
 
   const handleActiveButtonClicked = (i: number) => {
     setActiveButton(i);
