@@ -66,7 +66,6 @@ function Account() {
   };
 
   const toggleEdit = () => {
-    console.log("toggleEdit triggered");
     setIsEditable((prev) => !prev);
   };
 
@@ -81,7 +80,6 @@ function Account() {
 
   const logoutUser = () => {
     removeToken();
-    console.log("button clicked");
     navigate("/auth/login");
   };
 
