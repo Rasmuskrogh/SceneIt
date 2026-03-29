@@ -4,7 +4,7 @@
 This app is deployed on netlify while the backend, Strapi is deployed on Railway. The Railway deploy is dormant while the app is not in use so when you try to login or register for the first time it comess from a cold start so it might not work on the first or second try.
 
 #Link to the deployed app:
-https://havyousceneit.netlify.app/
+https://haveyousceneit.netlify.app/
 
 This app is under construction so there are still some parts that aren't finished yet or might look weird.
 
